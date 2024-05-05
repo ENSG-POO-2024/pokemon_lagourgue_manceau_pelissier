@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>822</width>
-    <height>600</height>
+    <width>819</width>
+    <height>543</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <widget class="QLabel" name="txt_choix_pokemon">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>30</x>
       <y>30</y>
       <width>461</width>
       <height>111</height>
@@ -31,10 +31,10 @@
     </property>
     <property name="font">
      <font>
-      <family>MingLiU_HKSCS-ExtB</family>
+      <family>Bernard MT Condensed</family>
       <pointsize>36</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="contextMenuPolicy">
@@ -44,19 +44,20 @@
      <string>Choix du pokémon :</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="choix_pokemon">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>170</y>
-      <width>411</width>
+      <x>40</x>
+      <y>160</y>
+      <width>331</width>
       <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Harlow Solid Italic</family>
-      <pointsize>36</pointsize>
+      <family>Bernard MT Condensed</family>
+      <pointsize>22</pointsize>
+      <italic>false</italic>
      </font>
     </property>
     <item>
@@ -70,13 +71,95 @@
      </property>
     </item>
    </widget>
+   <widget class="QPushButton" name="fuite">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>160</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bernard MT Condensed</family>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>OK</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="image_perso">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>0</y>
+      <width>331</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>images/perso_entier.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>-20</y>
+      <width>821</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>images/prairie_et_ciel.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="fuite_2">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>430</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bernard MT Condensed</family>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Fuite</string>
+    </property>
+   </widget>
+   <zorder>label</zorder>
+   <zorder>txt_choix_pokemon</zorder>
+   <zorder>choix_pokemon</zorder>
+   <zorder>image_perso</zorder>
+   <zorder>fuite</zorder>
+   <zorder>fuite_2</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>822</width>
+     <width>819</width>
      <height>21</height>
     </rect>
    </property>
