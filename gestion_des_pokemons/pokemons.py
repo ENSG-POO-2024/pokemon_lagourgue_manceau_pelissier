@@ -3,10 +3,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+# Récupération des data
 tableau_caracteristiques_pokemons = pd.read_csv("../data/pokemon_first_gen.csv").to_numpy()
-pokemons_coordinates = pd.read_csv("../data/pokemon_coordinates.csv",engine='python',skipfooter=898)
-# Changer nb pokémons ?
-coord = list(pokemons_coordinates['coordinates'])
+pokemons_coordinates = pd.read_csv("../data/pokemon_coordinates.csv",engine='python')
+
+# Pokémons choisis
+liste_starter = ['Bulbasaur','Charmander','Squirtle']
+liste_poke_choisis = ['Caterpie','Clefairy','Diglett','Eevee',"Farfetch'd",'Geodude','Growlithe','Jigglypuff',
+                  'Machop','Meowth','Nidoran♂','Nidoran♀','Oddish','Pikachu','Ponyta','Psyduck','Rattata',
+                  'Sandshrew','Venonat','Vulpix','Zubat']
+
+# Création du tableau contenant les 21 pokémons choisis et leurs coordonnées
+pokemons_coordinates['id'] = np.arange(998)
+liste_poke_coordinates = list(pokemons_coordinates['pokemon'])
+liste_index = []
+for k in range(len(liste_poke_coordinates)):
+    if liste_poke_coordinates[k] in liste_poke_choisis:
+        liste_index.append(k)
+        liste_poke_choisis.remove(liste_poke_coordinates[k])
+pokemons_coordinates_final = pokemons_coordinates[pokemons_coordinates['id'].isin(liste_index)]
+coord = list(pokemons_coordinates_final['coordinates'])
 liste_x = []
 liste_y = []
 for k in range(len(coord)):
@@ -17,9 +33,13 @@ for k in range(len(coord)):
         i += 1
     y = round(float(coord[k][i+1:i+8])*10,6)
     liste_y.append(y)
-pokemons_coordinates['X'] = liste_x
-pokemons_coordinates['Y'] = liste_y
-tableau_pokemons = pokemons_coordinates.to_numpy()
+pokemons_coordinates_final['X'] = liste_x
+pokemons_coordinates_final['Y'] = liste_y
+tableau_pokemons = pokemons_coordinates_final.to_numpy()
+
+# Affichage de la visualisation de la carte
+plt.scatter(pokemons_coordinates_final.X,pokemons_coordinates_final.Y)
+plt.show()
 
 
 
@@ -141,12 +161,7 @@ print(dico_objet['Ivysaur'])
 print(dico_objet['Bulbasaur'])
 dico_objet['Ivysaur'].calcul_pts_attaque(dico_objet['Bulbasaur'])
 
-print(dico_poke[('Alakazam', 138.754, 61.4279)])
+print(dico_poke[('Caterpie', 213, 227.632)])
 
 
-
-  
-# Carte
-plt.scatter(pokemons_coordinates.X,pokemons_coordinates.Y)
-plt.show()
 
