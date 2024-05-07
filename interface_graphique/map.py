@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'test_grille.ui'
+# Form implementation generated from reading ui file 'map.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -20,13 +20,13 @@ class Ui_MainWindow(object):
         self.herbe = QtWidgets.QLabel(self.centralwidget)
         self.herbe.setGeometry(QtCore.QRect(0, 0, 571, 431))
         self.herbe.setText("")
-        self.herbe.setPixmap(QtGui.QPixmap("images_test/herbe_barriere.jpeg"))
+        self.herbe.setPixmap(QtGui.QPixmap("../../../tests python/images_test/herbe_barriere.jpeg"))
         self.herbe.setScaledContents(True)
         self.herbe.setObjectName("herbe")
         self.tete_perso = QtWidgets.QLabel(self.centralwidget)
         self.tete_perso.setGeometry(QtCore.QRect(220, 180, 61, 51))
         self.tete_perso.setText("")
-        self.tete_perso.setPixmap(QtGui.QPixmap("../projet_pokémon/pokemon_lagourgue_manceau_pelissier/interface_graphique/images/tete_perso.png"))
+        self.tete_perso.setPixmap(QtGui.QPixmap("images/tete_perso.png"))
         self.tete_perso.setScaledContents(True)
         self.tete_perso.setObjectName("tete_perso")
         self.bouton_pokedeck = QtWidgets.QPushButton(self.centralwidget)
@@ -35,7 +35,7 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(496, 10, 51, 61))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../projet_pokémon/pokemon_lagourgue_manceau_pelissier/interface_graphique/images/th-removebg-preview (2).png"))
+        self.label.setPixmap(QtGui.QPixmap("images/th-removebg-preview (2).png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)
