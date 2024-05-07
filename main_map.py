@@ -7,6 +7,7 @@ Created on Mon May  6 21:26:24 2024
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 from PyQt5.QtCore import Qt, QEvent, QPoint
+from PyQt5.QtGui import QPixmap
 from PyQt5.uic import loadUi  # Importez la fonction loadUi pour charger le fichier UI
 from gestion_des_pokemons.pokemons import  *
 from interface_graphique.map import Ui_MainWindow
@@ -31,7 +32,7 @@ class MainWindow(QMainWindow):
         
         #loadUi("map.ui", self)  # Chargez le fichier UI de la fenêtre principale
         # Connectez le bouton pour ouvrir la boîte de dialogue
-        self.ui.bouton_pokedeck.clicked.connect(self.open_dialog)
+        self.ui.bouton_pokedeck.clicked.connect(self.open_dialog_Pokedeck)
         
 
     def eventFilter(self, source, event):
@@ -78,9 +79,9 @@ class MainWindow(QMainWindow):
         
         #récuperer les coord du perso
         tete_perso_pos = self.ui.tete_perso.pos()
-        print("Coordonnées du carré : ", tete_perso_pos.x(), tete_perso_pos.y())
+        #print("Coordonnées du carré : ", tete_perso_pos.x(), tete_perso_pos.y())
         
-    def open_dialog(self):
+    def open_dialog_Pokedeck(self):
         # Créez une instance de la boîte de dialogue
         dialog = PokedeckDlg()
         dialog.exec_()  # Affichez la boîte de dialogue de manière modale
@@ -91,6 +92,20 @@ class PokedeckDlg(QDialog):
     def __init__(self):
         super().__init__()
         loadUi("interface_graphique/pokedeck.ui", self)  # Chargez le fichier UI de la boîte de dialogue
+        self.comboBox.currentIndexChanged.connect(self.load_image)  # Connectez le signal de changement de sélection de la ComboBox
+
+    def load_image(self, index):
+        selected_item = self.comboBox.currentText()
+        if selected_item == "Bulbasaur":
+            image_path = "interface_graphique/images/images_pokemon/pokemons_finaux/face/Bulbasaur.png" # Chemin vers l'image 1
+        elif selected_item == "Squirtle":
+            image_path = "interface_graphique/images/images_pokemon/pokemons_finaux/face/Squirtle.png"  # Chemin vers l'image 2
+            
+        pixmap = QPixmap(image_path)
+        self.label_2.setPixmap(pixmap)
+        self.label_2.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
+
+
 
 
 if __name__ == "__main__":
