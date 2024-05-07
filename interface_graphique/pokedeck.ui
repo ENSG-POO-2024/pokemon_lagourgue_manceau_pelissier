@@ -26,7 +26,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>images_test/perso_avec_pokemon.png</pixmap>
+    <pixmap>../../../tests python/images_test/perso_avec_pokemon.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -70,7 +70,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../projet_pokémon/pokemon_lagourgue_manceau_pelissier/interface_graphique/images/prairie_et_ciel.png</pixmap>
+    <pixmap>images/prairie_et_ciel.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
