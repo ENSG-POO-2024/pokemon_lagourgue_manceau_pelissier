@@ -70,12 +70,18 @@ class Dlg_choix_action(QDialog):
             """
             dlg = Dialogue_attaque(QDialog)
             dlg.exec()
+
+class Dlg_choix_combat(Qdialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
     
     
 class Carte(QMainWindow): #dans main_map, à récupérer
     #représente le fond qu'il y a en permanence
     #a la méthode bouger pour le déplacement du Joueur
-    def Bouger(self):
+    def Detection_pokemon(self):
+        if revelation(self.ui.tete_perso.pos()) != None:
+            self.Combattre(dico_poke[revelation(self.ui.tete_perso.pos())])
         pass
     def Combattre(self,sauvage):
         """
@@ -91,7 +97,7 @@ class Carte(QMainWindow): #dans main_map, à récupérer
         None.
 
         """
-        choisi = dico_poke[self.choix_pokemon.currentText()]
+        choisi = dico_poke[self.choix_pokemon.currentText()] #à récupérer avant
         
         hp_sauvage = sauvage.HP
         hp_choisi= choisi.HP

@@ -5,7 +5,7 @@ Created on Mon May  6 21:26:24 2024
 @author: loeva
 """
 import sys
-from pokedeck import Ui_pokedeck
+from interface_graphique.pokedeck import Ui_pokedeck as pokedeck
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 from PyQt5.QtCore import Qt, QEvent, QPoint
 from PyQt5.uic import loadUi  # Importez la fonction loadUi pour charger le fichier UI
