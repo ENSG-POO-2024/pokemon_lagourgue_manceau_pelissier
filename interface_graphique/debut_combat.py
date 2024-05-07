@@ -11,11 +11,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(819, 543)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(819, 543)
+        self.centralwidget = QtWidgets.QWidget(Dialog)
         self.centralwidget.setObjectName("centralwidget")
         self.txt_choix_pokemon = QtWidgets.QLabel(self.centralwidget)
         self.txt_choix_pokemon.setGeometry(QtCore.QRect(30, 30, 461, 111))
@@ -74,21 +74,21 @@ class Ui_MainWindow(object):
         self.image_perso.raise_()
         self.fuite.raise_()
         self.fuite_2.raise_()
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        Dialog.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(Dialog)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 819, 21))
         self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        Dialog.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(Dialog)
         self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+        Dialog.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        Dialog.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.txt_choix_pokemon.setText(_translate("MainWindow", "Choix du pokémon :"))
         self.choix_pokemon.setItemText(0, _translate("MainWindow", "pokémon 1"))
         self.choix_pokemon.setItemText(1, _translate("MainWindow", "pokémon 2"))
