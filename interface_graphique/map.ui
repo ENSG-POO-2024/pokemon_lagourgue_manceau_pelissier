@@ -84,6 +84,10 @@
      <bool>true</bool>
     </property>
    </widget>
+   <zorder>herbe</zorder>
+   <zorder>bouton_pokedeck</zorder>
+   <zorder>label</zorder>
+   <zorder>tete_perso</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

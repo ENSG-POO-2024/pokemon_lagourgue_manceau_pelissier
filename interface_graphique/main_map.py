@@ -25,9 +25,9 @@ class MainWindow(QMainWindow):
         self.ui.tete_perso.setFocus()  # Assurez-vous que le QLabel du perso a le focus pour recevoir les événements de clavier
         self.ui.tete_perso.installEventFilter(self)
         
-        loadUi("map.ui", self)  # Chargez le fichier UI de la fenêtre principale
+        #loadUi("map.ui", self)  # Chargez le fichier UI de la fenêtre principale
         # Connectez le bouton pour ouvrir la boîte de dialogue
-        self.bouton_pokedeck.clicked.connect(self.open_dialog)
+        #self.bouton_pokedeck.clicked.connect(self.open_dialog)
 
     def eventFilter(self, source, event):
         if event.type() == QEvent.KeyPress:
@@ -51,8 +51,8 @@ class MainWindow(QMainWindow):
         new_pos = square_pos + QPoint(dx, dy)
     
         # Récupérer les dimensions de l'image
-        image_width = self.ui.herbe_barriere.width()
-        image_height = self.ui.herbe_barriere.height()
+        image_width = self.ui.herbe.width()
+        image_height = self.ui.herbe.height()
     
         # Récupérer les dimensions du carré
         square_width = self.ui.tete_perso.width()
@@ -93,5 +93,5 @@ if __name__ == "__main__":
     
     window = MainWindow()
     window.show()
-    window.tete_perso.setFocus()
+    #window.tete_perso.setFocus()
     sys.exit(app.exec_())
