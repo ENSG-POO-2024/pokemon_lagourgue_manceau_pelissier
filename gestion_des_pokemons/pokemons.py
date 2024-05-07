@@ -7,10 +7,10 @@ import os
 # Récupération des data
 path = os.path.dirname(os.path.abspath(__file__))
 
-path = os.path.join(path, "../data/pokemon_first_gen.csv")
-tableau_caracteristiques_pokemons = pd.read_csv(path).to_numpy()
-
-pokemons_coordinates = pd.read_csv("../data/pokemon_coordinates.csv",engine='python')
+path1 = os.path.join(path, "../data/pokemon_first_gen.csv")
+tableau_caracteristiques_pokemons = pd.read_csv(path1).to_numpy()
+path2 = os.path.join(path, "../data/pokemon_coordinates.csv")
+pokemons_coordinates = pd.read_csv(path2,engine='python')
 
 # Pokémons choisis
 liste_starter = ['Bulbasaur','Charmander','Squirtle']
@@ -119,8 +119,10 @@ class Pokemon(Caracteristiques_Pokemon):
         super().__init__(ligne_pokemon)
         self.coordX = ligne_coord[3]
         self.coordY = ligne_coord[4]
-        self.img_face = mpimg.imread(f"../interface_graphique/images/images_pokemon/pokemons_finaux/face/{ligne_coord[0]}.png")
-        self.img_dos = mpimg.imread(f"../interface_graphique/images/images_pokemon/pokemons_finaux/dos/{ligne_coord[0]}.png")
+        path3= os.path.join(path, f"../interface_graphique/images/images_pokemon/pokemons_finaux/face/{ligne_coord[0]}.png")
+        path4 = os.path.join(path, f"../interface_graphique/images/images_pokemon/pokemons_finaux/dos/{ligne_coord[0]}.png")
+        self.img_face = mpimg.imread(path3)
+        self.img_dos = mpimg.imread(path4)
         
     def __str__(self):
         txt2 = f'\nCoordonnées : [{self.coordX}, {self.coordY}]'
@@ -155,7 +157,7 @@ for k in range(len(liste_starter)):
 print(dico_objet['Ivysaur'])
 print(dico_objet['Ivysaur'].calcul_pts_attaque(dico_objet['Bulbasaur']))
 """
-dico_poke['Caterpie'].plot_face()
+dico_poke['Caterpie'].plot_dos()
 print(dico_poke['Caterpie'])
 
 

@@ -5,20 +5,15 @@ Created on Fri May  3 13:44:26 2024
 @author: elago
 """
 import pandas as pd
+import os
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog
 from gestion_des_pokemons.pokemons import  *
-from interface_graphique.choix_attaque import Ui_Boite_Dialogue as Choix_attaques_diag
-from interface_graphique.ecran_triple import Ui_Boite_Dialogue as Ecran_triple_diag
-from interface_graphique.main_map import CarteWindow, XXXXDlg
+from interface_graphique.choix_attaque import Ui_Dialog as Choix_attaques_diag
+from interface_graphique.ecran_triple import Ui_Dialog as Ecran_triple_diag
+from interface_graphique.main_map import MainWindow, XXXXDlg
 import random as rand
 
-
-class Jeu():
-    def ___init__(self):
-        #boite dialogue
-        #appelle la boite de dialogue qui renvoit un nom
-        Joueur(nom)
 
         
 class Joueur(): #Ui_MainWindow
@@ -27,8 +22,6 @@ class Joueur(): #Ui_MainWindow
         
         self.nom = nom
         self.pokedeck = pokedeck
-        
-        
     
    
 
@@ -57,19 +50,17 @@ class Dlg_choix_action(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ecran_triple_diag
-        self.bouton_fuir.clicked.connect(self.fuite)
+        self.bouton_fuir.clicked.connect(self.close)
         self.bouton_attaque.clicked.connect(self.attaquer)
         self.bouton_changer_pokemon.clicked.connect(self.changer)
         
-        def fuite(self):
-            #retour map
-            pass
+        
         def changer(self):
             #on change mais on attaque pas
             pass
         def attaquer(self):
             """
-            renvoit à la boite de dialogue du choix d'attaque
+            renvoie à la boite de dialogue du choix d'attaque
             entre neutre et spéciale
 
             Returns
@@ -100,16 +91,19 @@ class Carte(QMainWindow): #dans main_map, à récupérer
         None.
 
         """
+        choisi = dico_poke[self.choix_pokemon.currentText()]
         
-        pokemon_choisi = self.choix_pokemon.currentText()
+        hp_sauvage = sauvage.HP
+        hp_choisi= choisi.HP
+        
         #bouton
-        if pokemon_choisi.joueur_commence(sauvage): #condiditon de vitesse
-            points = pokemon_choisi.calcul_pts_attaque(sauvage)
+        if choisi.joueur_commence(sauvage): #condiditon de vitesse
+            points = choisi.calcul_pts_attaque(sauvage)
             dlg_attaque = Dialogue_attaque(self)
             nbr_degat_att_spe.setText(str(points[1]))
             nbr_degat_att_neutre.setText(str(points[0]))
             
-            sauvage.HP-= points # à modifier selon choix joueur
+            hp_sauvage -= points # à modifier selon choix joueur
         else:
             
             if rand.random() < 0.5:
@@ -157,10 +151,4 @@ class Attaque():
 #faire une liste des attaques possibles
 
 if __name__ == "__main__":
-    def run_app():
-        app = QApplication(sys.argv)
-        mainWin = CarteWindow()
-        mainWin.show()
-        app.exec_()
-    run_app()
-    pass
+    print(dico_poke['Caterpie'])
