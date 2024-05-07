@@ -76,9 +76,29 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>40</y>
+     <width>181</width>
+     <height>211</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>images/perso_avec_pokemon.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
   <zorder>fond_prairie</zorder>
   <zorder>perso_avec_pokemon</zorder>
   <zorder>comboBox</zorder>
+  <zorder>label</zorder>
  </widget>
  <resources/>
  <connections/>
