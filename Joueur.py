@@ -11,19 +11,12 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog
 from gestion_des_pokemons.pokemons import  *
 from interface_graphique.choix_attaque import Ui_Dialog as Choix_attaques_diag
 from interface_graphique.ecran_triple import Ui_Dialog as Ecran_triple_diag
-from interface_graphique.main_map import MainWindow, XXXXDlg
+from interface_graphique.pokedeck import Ui_pokedeck as Pokedeck
+#from interface_graphique.debut_combat import Ui_Dialog as Choix_poke_fuite
 import random as rand
 
 
-        
-class Joueur(): #Ui_MainWindow
-    #liste représente l'ensemble des pokémons du deck du joueur
-    def __init__(self, pokedeck, nom):
-        
-        self.nom = nom
-        self.pokedeck = pokedeck
-    
-   
+          
 
 class Dialogue_choix_poke(QDialog):
     
@@ -31,35 +24,47 @@ class Dialogue_choix_poke(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         #self.ui = Ui_Boite_Dialogue
+        #self.ok.clicked_connect(self.accept)
+    
+    def accept(self):
+        pass
     pass            
         
 class Dialogue_attaque(QDialog):
-    def __init__(self, parent=None):
+    def __init__(self,points, parent=None):
         super().__init__(parent)
+
         self.ui = Choix_attaques_diag
         self.bouton_att_neutre.clicked.connect(self.att_neutre)
         self.bouton_att_spe.clicked.connect(self.att_spe)
+        self.nbr_degat_att_spe.setText(str(points[1]))
+        self.nbr_degat_att_neutre.setText(str(points[0]))
         
-        def att_neutre(self,pokemon):
+        
+    def att_neutre(self,points):
+        return points[0]
             
-            pass
-        def att_spe(self):
-            pass
+    def att_spe(self, points):
+        return points[1]
+            
 
 class Dlg_choix_action(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ecran_triple_diag
+        
         self.bouton_fuir.clicked.connect(self.close)
         self.bouton_attaque.clicked.connect(self.attaquer)
         self.bouton_changer_pokemon.clicked.connect(self.changer)
         
         
-        def changer(self):
-            #on change mais on attaque pas
-            pass
-        def attaquer(self):
-            """
+    def changer(self):
+        #on change mais on attaque pas
+        dlg_choix = Dialogue_choix_poke(self)
+        dlg.exec()
+            
+    def attaquer(self):
+        """
             renvoie à la boite de dialogue du choix d'attaque
             entre neutre et spéciale
 
@@ -68,19 +73,18 @@ class Dlg_choix_action(QDialog):
             None.
 
             """
-            dlg = Dialogue_attaque(QDialog)
-            dlg.exec()
+        dlg = Dialogue_attaque(self)
+        dlg.exec()
 
-class Dlg_choix_combat(Qdialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
+
     
     
-class Carte(QMainWindow): #dans main_map, à récupérer
-    #représente le fond qu'il y a en permanence
-    #a la méthode bouger pour le déplacement du Joueur
-    def Detection_pokemon(self):
+class Main(QMainWindow): #dans main_map, à récupérer
+    
+    def Move(self):
         if revelation(self.ui.tete_perso.pos()) != None:
+            dlg_début = Choix_poke_fuite()
+            dlg_début.exxec()
             self.Combattre(dico_poke[revelation(self.ui.tete_perso.pos())])
         pass
     def Combattre(self,sauvage):
@@ -105,9 +109,8 @@ class Carte(QMainWindow): #dans main_map, à récupérer
         #bouton
         if choisi.joueur_commence(sauvage): #condiditon de vitesse
             points = choisi.calcul_pts_attaque(sauvage)
-            dlg_attaque = Dialogue_attaque(self)
-            nbr_degat_att_spe.setText(str(points[1]))
-            nbr_degat_att_neutre.setText(str(points[0]))
+            dlg_attaque = Dialogue_attaque(self, points)
+            dlg_attaque.exec()
             
             hp_sauvage -= points # à modifier selon choix joueur
         else:
@@ -126,35 +129,32 @@ class Carte(QMainWindow): #dans main_map, à récupérer
                 else:
                     point =sauvage.calcul_pts_attaque(pokemon_choisi)[1]
                 pokemon_choisi.HP -= point
+                dlg_choix = Dlg_choix_action(self)
+                dlg_choix.exec()
+                #à afficher dans la barre de vie
             else:
                 dlg_choix = Dlg_choix_action(self)
                 dlg_choix.exec()
+                if rand.random() < 0.5:
+                    point = sauvage.calcul_pts_attaque(pokemon_choisi)[0]
+                    
+                else:
+                    point =sauvage.calcul_pts_attaque(pokemon_choisi)[1]
+                pokemon_choisi.HP -= point
                  
              
             
             if pokemon.hp < 0:
-                self.pokedeck += pokemon
+                dico_poke[sauvage].coordX = 'pokédeck'
+                dico_poke[sauvage].coordY = 'pokédeck'
+                self.pokedeck.addItem( pokemon)
+        # afficher vous avez perdu
+                
    
-    def fuite(self):
-        #retour map
-        pass
-    def attaque(self):
-        degats = ...
-        self.bouton_att_neutre.clicked.connect(self.att_neutre)
-        self.bouton_att_spe.clicked.connect(self.att_spe)#à mettre dans le init
-    
-    def changer(self):
-        pass
-    
-        
 
-class Attaque():
-    def __init__(self, nom, genre, nbpoints):
-        self.nom = nom
-        self.genre = genre
-        self.nbpoints = nbpoints
+    
         
-#faire une liste des attaques possibles
+        
 
 if __name__ == "__main__":
-    print(dico_poke['Caterpie'])
+    print(dico_poke['Venonat'])
