@@ -11,7 +11,7 @@ from PyQt5.QtCore import Qt, QEvent, QPoint
 from PyQt5.uic import loadUi  # Importez la fonction loadUi pour charger le fichier UI
 
 
-from test_grille import Ui_MainWindow  # Importez la classe générée par pyuic5
+from map import Ui_MainWindow  # Importez la classe générée par pyuic5
 
 class MainWindow(QMainWindow):
     def __init__(self):
