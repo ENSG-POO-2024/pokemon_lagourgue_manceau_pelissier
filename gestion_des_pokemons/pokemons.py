@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import os
 
-# Récupération des data
 path = os.path.dirname(os.path.abspath(__file__))
 
+# Récupération des data
 path1 = os.path.join(path, "../data/pokemon_first_gen.csv")
 tableau_caracteristiques_pokemons = pd.read_csv(path1).to_numpy()
 path2 = os.path.join(path, "../data/pokemon_coordinates.csv")
@@ -32,12 +32,12 @@ coord = list(pokemons_coordinates_final['coordinates'])
 liste_x = []
 liste_y = []
 for k in range(len(coord)):
-    x = round(float(coord[k][1:8])*10,6)
+    x = round(float(coord[k][1:8])*10*2.325+20,6)
     liste_x.append(x)
     i = 0
     while coord[k][i] != ' ':
         i += 1
-    y = round(float(coord[k][i+1:i+8])*10,6)
+    y = round(500-float(coord[k][i+1:i+8])*10*4.8,6)
     liste_y.append(y)
 pokemons_coordinates_final['X'] = liste_x
 pokemons_coordinates_final['Y'] = liste_y
@@ -119,7 +119,7 @@ class Pokemon(Caracteristiques_Pokemon):
         super().__init__(ligne_pokemon)
         self.coordX = ligne_coord[3]
         self.coordY = ligne_coord[4]
-        path3= os.path.join(path, f"../interface_graphique/images/images_pokemon/pokemons_finaux/face/{ligne_coord[0]}.png")
+        path3 = os.path.join(path, f"../interface_graphique/images/images_pokemon/pokemons_finaux/face/{ligne_coord[0]}.png")
         path4 = os.path.join(path, f"../interface_graphique/images/images_pokemon/pokemons_finaux/dos/{ligne_coord[0]}.png")
         self.img_face = mpimg.imread(path3)
         self.img_dos = mpimg.imread(path4)
@@ -161,18 +161,4 @@ dico_poke['Caterpie'].plot_dos()
 print(dico_poke['Caterpie'])
 
 
-def calcul_distance_poke(coord,nom_poke):
-    if dico_poke[nom_poke].coordX == 'pokédeck':
-        return 1000
-    return np.sqrt((coord[0] - dico_poke[nom_poke].coordX)**2 + (coord[1] - dico_poke[nom_poke].coordY)**2)
-    
 
-def revelation(coord):
-    distance_detection = 5
-    for k in liste_tous_poke:
-        dist = calcul_distance_poke(coord,k)
-        if dist <= distance_detection:
-            return k
-    return None
-       
-print(revelation([227,10]))

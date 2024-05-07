@@ -81,6 +81,24 @@ class MainWindow(QMainWindow):
         tete_perso_pos = self.ui.tete_perso.pos()
         #print("Coordonnées du carré : ", tete_perso_pos.x(), tete_perso_pos.y())
         
+        if self.detection([tete_perso_pos.x(),tete_perso_pos.y()]) != None:
+            print('detecté !!!!')
+            
+            
+    def calcul_distance_poke(self,coord,nom_poke):
+        if dico_poke[nom_poke].coordX == 'pokédeck':
+            return 1000
+        return np.sqrt((coord[0] - dico_poke[nom_poke].coordX)**2 + (coord[1] - dico_poke[nom_poke].coordY)**2)
+        
+
+    def detection(self,coord):
+        distance_detection = 50
+        for k in liste_tous_poke:
+            dist = self.calcul_distance_poke(coord,k)
+            if dist <= distance_detection:
+                return k
+        return None
+        
     def open_dialog_Pokedeck(self):
         # Créez une instance de la boîte de dialogue
         dialog = PokedeckDlg()
