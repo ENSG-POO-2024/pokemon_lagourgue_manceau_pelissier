@@ -18,7 +18,7 @@ class Ui_pokedeck(object):
         self.perso_avec_pokemon = QtWidgets.QLabel(pokedeck)
         self.perso_avec_pokemon.setGeometry(QtCore.QRect(220, 20, 171, 201))
         self.perso_avec_pokemon.setText("")
-        self.perso_avec_pokemon.setPixmap(QtGui.QPixmap("../../../tests python/images_test/perso_avec_pokemon.png"))
+        self.perso_avec_pokemon.setPixmap(QtGui.QPixmap("interface_graphique/images/perso_avec_pokemon.png"))
         self.perso_avec_pokemon.setScaledContents(True)
         self.perso_avec_pokemon.setObjectName("perso_avec_pokemon")
         self.comboBox = QtWidgets.QComboBox(pokedeck)
