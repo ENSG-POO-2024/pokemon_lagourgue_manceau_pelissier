@@ -13,6 +13,7 @@ liste_starter = ['Bulbasaur','Charmander','Squirtle']
 liste_poke_choisis = ['Caterpie','Clefairy','Diglett','Eevee','Ekans',"Farfetch'd",'Geodude','Growlithe',
                       'Jigglypuff','Machop','Meowth','Oddish','Paras','Pikachu','Ponyta','Psyduck',
                       'Rattata','Sandshrew','Venonat','Vulpix','Zubat']
+liste_tous_poke = liste_starter + liste_poke_choisis
 
 # Création du tableau contenant les 21 pokémons choisis et leurs coordonnées
 pokemons_coordinates['id'] = np.arange(998)
@@ -106,36 +107,23 @@ class Caracteristiques_Pokemon:
         points_atk_spe = round((self.sp_atk - autre.sp_def * (autre.sp_def/autre.total))* coeff)
         return points_atk_neutre, points_atk_spe, coeff
             
-    def tour_joueur(self,autre):
-        Attaquer = True
-        Fuir = False
-        Changer_poke = False
-        
-    def changement_poke(self):
-        pass
-              
-    def combat(self,autre):
-        joueur_HP = self.HP
-        sauvage_HP = autre.HP
-        Attaquer = True
-        while Attaquer:
-            while joueur_HP > 0 and sauvage_HP > 0:
-                pass
-
-
 
 class Pokemon(Caracteristiques_Pokemon):
     
     def __init__(self,ligne_coord):
         ligne_pokemon = dico_array[ligne_coord[0]]
         super().__init__(ligne_pokemon)
-        self.coordX = ligne_coord[2]
-        self.coordY = ligne_coord[3]
+        self.coordX = ligne_coord[3]
+        self.coordY = ligne_coord[4]
+        self.img_face = mpimg.imread(f"../interface_graphique/images/images_pokemon/pokemons_finaux/face/{ligne_coord[0]}.png")
         self.img_dos = mpimg.imread(f"../interface_graphique/images/images_pokemon/pokemons_finaux/dos/{ligne_coord[0]}.png")
         
     def __str__(self):
         txt2 = f'\nCoordonnées : [{self.coordX}, {self.coordY}]'
         return super().__str__() + txt2
+    
+    def plot_face(self):
+        plt.imshow(self.img_face)
     
     def plot_dos(self):
         plt.imshow(self.img_dos)
@@ -155,25 +143,30 @@ for k in range(len(tableau_pokemons)):
     ligne_coord = tableau_pokemons[k]
     dico_poke[ligne_coord[0]] = Pokemon(ligne_coord)
 for k in range(len(liste_starter)):
-    ligne_coord = np.array([liste_starter[k],'pokédex','pokédex','pokédex','pokédex'])
+    ligne_coord = np.array([liste_starter[k],'pokédeck','pokédeck','pokédeck','pokédeck'])
     dico_poke[ligne_coord[0]] = Pokemon(ligne_coord)
     
    
-
+"""
 print(dico_objet['Ivysaur'])
 print(dico_objet['Ivysaur'].calcul_pts_attaque(dico_objet['Bulbasaur']))
-
-dico_poke['Caterpie'].plot_dos()
+"""
+dico_poke['Caterpie'].plot_face()
 print(dico_poke['Caterpie'])
 
 
 def calcul_distance_poke(coord,nom_poke):
+    if dico_poke[nom_poke].coordX == 'pokédeck':
+        return 1000
     return np.sqrt((coord[0] - dico_poke[nom_poke].coordX)**2 + (coord[1] - dico_poke[nom_poke].coordY)**2)
     
 
 def revelation(coord):
-    distance_detection = 1
-    for k in range(len(dico_poke)):
-        dist = calcul_distance_poke(coord, nom_poke)
-        
-print(calcul_distance_poke([0,0], 'Caterpie'))
+    distance_detection = 5
+    for k in liste_tous_poke:
+        dist = calcul_distance_poke(coord,k)
+        if dist <= distance_detection:
+            return k
+    return None
+       
+print(revelation([227,10]))
