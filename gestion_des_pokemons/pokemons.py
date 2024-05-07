@@ -2,10 +2,14 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
-
+import os
 
 # Récupération des data
-tableau_caracteristiques_pokemons = pd.read_csv("../data/pokemon_first_gen.csv").to_numpy()
+path = os.path.dirname(os.path.abspath(__file__))
+
+path = os.path.join(path, "../data/pokemon_first_gen.csv")
+tableau_caracteristiques_pokemons = pd.read_csv(path).to_numpy()
+
 pokemons_coordinates = pd.read_csv("../data/pokemon_coordinates.csv",engine='python')
 
 # Pokémons choisis
