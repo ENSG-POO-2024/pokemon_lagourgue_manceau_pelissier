@@ -5,18 +5,17 @@ Created on Mon May  6 21:26:24 2024
 @author: loeva
 """
 import sys
-from interface_graphique.pokedeck import Ui_pokedeck as pokedeck
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 from PyQt5.QtCore import Qt, QEvent, QPoint
 from PyQt5.uic import loadUi  # Importez la fonction loadUi pour charger le fichier UI
 from gestion_des_pokemons.pokemons import  *
+from interface_graphique.map import Ui_MainWindow
+from interface_graphique.pokedeck import Ui_pokedeck
 from interface_graphique.choix_attaque import Ui_Dialog as Choix_attaques_diag
 from interface_graphique.ecran_triple import Ui_Dialog as Ecran_triple_diag
-from interface_graphique.main_map import MainWindow, XXXXDlg
+
 import random as rand
 
-
-from map import Ui_MainWindow  # Importez la classe générée par pyuic5
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -91,7 +90,7 @@ class MainWindow(QMainWindow):
 class PokedeckDlg(QDialog):
     def __init__(self):
         super().__init__()
-        loadUi("pokedeck.ui", self)  # Chargez le fichier UI de la boîte de dialogue
+        loadUi("interface_graphique/pokedeck.ui", self)  # Chargez le fichier UI de la boîte de dialogue
 
 
 if __name__ == "__main__":
