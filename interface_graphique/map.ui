@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>568</width>
-    <height>474</height>
+    <width>1034</width>
+    <height>610</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>571</width>
-      <height>431</height>
+      <width>1031</width>
+      <height>571</height>
      </rect>
     </property>
     <property name="text">
@@ -55,7 +55,7 @@
    <widget class="QPushButton" name="bouton_pokedeck">
     <property name="geometry">
      <rect>
-      <x>480</x>
+      <x>930</x>
       <y>80</y>
       <width>71</width>
       <height>23</height>
@@ -68,7 +68,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>496</x>
+      <x>940</x>
       <y>10</y>
       <width>51</width>
       <height>61</height>
@@ -94,7 +94,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>568</width>
+     <width>1034</width>
      <height>21</height>
     </rect>
    </property>
