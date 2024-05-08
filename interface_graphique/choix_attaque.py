@@ -11,11 +11,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(736, 363)
-        self.centralwidget = QtWidgets.QWidget(Dialog)
+class Ui_choix_attaque(object):
+    def setupUi(self, choix_attaque):
+        choix_attaque.setObjectName("choix_attaque")
+        choix_attaque.resize(736, 363)
+        self.centralwidget = QtWidgets.QWidget(choix_attaque)
         self.centralwidget.setObjectName("centralwidget")
         self.image_fond = QtWidgets.QLabel(self.centralwidget)
         self.image_fond.setGeometry(QtCore.QRect(-60, -10, 831, 591))
@@ -63,24 +63,24 @@ class Ui_Dialog(object):
         font.setPointSize(12)
         self.nbr_degat_att_neutre.setFont(font)
         self.nbr_degat_att_neutre.setObjectName("nbr_degat_att_neutre")
-        Dialog.setCentralWidget(self.centralwidget)
+        choix_attaque.setCentralWidget(self.centralwidget)
         # self.menubar = QtWidgets.QMenuBar(Dialog)
         # self.menubar.setGeometry(QtCore.QRect(0, 0, 736, 21))
         # self.menubar.setObjectName("menubar")
         # MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(Dialog)
+        self.statusbar = QtWidgets.QStatusBar(choix_attaque)
         self.statusbar.setObjectName("statusbar")
-        Dialog.setStatusBar(self.statusbar)
+        choix_attaque.setStatusBar(self.statusbar)
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(choix_attaque)
+        QtCore.QMetaObject.connectSlotsByName(choix_attaque)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, choix_attaque):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.bouton_att_spe.setText(_translate("MainWindow", "Attaque spéciale"))
-        self.bouton_att_neutre.setText(_translate("MainWindow", "Attaque neutre"))
-        self.txt_degats_att_spe.setText(_translate("MainWindow", "Dégats inffligés :              HP"))
-        self.nbr_degat_att_spe.setText(_translate("MainWindow", "XX"))
-        self.txt_degats_att_neutre.setText(_translate("MainWindow", "Dégats inffligés :              HP"))
-        self.nbr_degat_att_neutre.setText(_translate("MainWindow", "XX"))
+        choix_attaque.setWindowTitle(_translate("choix_attaque", "Dialog"))
+        self.bouton_att_spe.setText(_translate("choix_attaque", "Attaque spéciale"))
+        self.bouton_att_neutre.setText(_translate("choix_attaque", "Attaque neutre"))
+        self.txt_degats_att_spe.setText(_translate("choix_attaque", "Dégats inffligés :              HP"))
+        self.nbr_degat_att_spe.setText(_translate("choix_attaque", "XX"))
+        self.txt_degats_att_neutre.setText(_translate("choix_attaque", "Dégats inffligés :              HP"))
+        self.nbr_degat_att_neutre.setText(_translate("choix_attaque", "XX"))

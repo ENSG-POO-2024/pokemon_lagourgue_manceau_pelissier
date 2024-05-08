@@ -1,29 +1,28 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon May  6 21:26:24 2024
-
-@author: loeva
-"""
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
 from PyQt5.QtCore import Qt, QEvent, QPoint
 from PyQt5.QtGui import QPixmap
-from PyQt5.uic import loadUi  # Importez la fonction loadUi pour charger le fichier UI
-from gestion_des_pokemons.pokemons import  *
-from interface_graphique.map import Ui_MainWindow
+import gestion_des_pokemons.pokemons as  pok
+from interface_graphique.map import Ui_map
+from interface_graphique.ecran_accueil import Ui_ecran_accueil
 from interface_graphique.pokedeck import Ui_pokedeck
-from interface_graphique.choix_attaque import Ui_Dialog as Choix_attaques_diag
-from interface_graphique.ecran_triple import Ui_Dialog as Ecran_triple_diag
-
+from interface_graphique.rencontre_pokemon_sauvage import Ui_rencontre_pokemon_sauvage
+from interface_graphique.choix_pokemon import Ui_choix_pokemon
+from interface_graphique.choix_attaque import Ui_choix_attaque
+from interface_graphique.fond_combat import Ui_fond_combat
+from interface_graphique.ecran_triple import Ui_ecran_triple
 import random as rand
+import numpy as np
+import pandas as pd
 
 
 class MainWindow(QMainWindow):
+    
     def __init__(self):
         super().__init__()
 
         # Utilisez la classe générée par Qt Designer
-        self.ui = Ui_MainWindow()
+        self.ui = Ui_map()
         self.ui.setupUi(self)
 
         # Connectez les signaux et les slots pour gérer les événements de clavier
@@ -34,7 +33,6 @@ class MainWindow(QMainWindow):
         # Connectez le bouton pour ouvrir la boîte de dialogue
         self.ui.bouton_pokedeck.clicked.connect(self.open_dialog_Pokedeck)
         
-
     def eventFilter(self, source, event):
         if event.type() == QEvent.KeyPress:
             key = event.key()
@@ -81,47 +79,67 @@ class MainWindow(QMainWindow):
         tete_perso_pos = self.ui.tete_perso.pos()
         #print("Coordonnées du carré : ", tete_perso_pos.x(), tete_perso_pos.y())
         
-        if self.detection([tete_perso_pos.x(),tete_perso_pos.y()]) != None:
-            print('detecté !!!!')
-            
-            
+        coord = [self.ui.tete_perso.pos().x(),self.ui.tete_perso.pos().y()]
+        if self.detection(coord) != None:
+            dialog = RencontreDlg()
+            dialog.exec_()  # Affichez la boîte de dialogue de manière modale
+            self.ui.tete_perso.setFocus()
+                                 
     def calcul_distance_poke(self,coord,nom_poke):
-        if dico_poke[nom_poke].coordX == 'pokédeck':
+        if pok.dico_poke[nom_poke].coordX == 'pokédeck':
             return 1000
-        return np.sqrt((coord[0] - dico_poke[nom_poke].coordX)**2 + (coord[1] - dico_poke[nom_poke].coordY)**2)
-        
+        return np.sqrt((coord[0] - pok.dico_poke[nom_poke].coordX)**2 + (coord[1] - pok.dico_poke[nom_poke].coordY)**2)
 
     def detection(self,coord):
         distance_detection = 50
-        for k in liste_tous_poke:
+        for k in pok.liste_tous_poke:
             dist = self.calcul_distance_poke(coord,k)
             if dist <= distance_detection:
                 return k
         return None
-        
+    
     def open_dialog_Pokedeck(self):
         # Créez une instance de la boîte de dialogue
         dialog = PokedeckDlg()
         dialog.exec_()  # Affichez la boîte de dialogue de manière modale
         self.ui.tete_perso.setFocus()
-
+        
 
 class PokedeckDlg(QDialog):
-    def __init__(self):
-        super().__init__()
-        loadUi("interface_graphique/pokedeck.ui", self)  # Chargez le fichier UI de la boîte de dialogue
-        self.comboBox.currentIndexChanged.connect(self.load_image)  # Connectez le signal de changement de sélection de la ComboBox
 
-    def load_image(self, index):
-        selected_item = self.comboBox.currentText()
-        if selected_item == "Bulbasaur":
-            image_path = "interface_graphique/images/images_pokemon/pokemons_finaux/face/Bulbasaur.png" # Chemin vers l'image 1
-        elif selected_item == "Squirtle":
-            image_path = "interface_graphique/images/images_pokemon/pokemons_finaux/face/Squirtle.png"  # Chemin vers l'image 2
-            
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.ui = Ui_pokedeck()
+        self.ui.setupUi(self)
+        self.ui.comboBox.currentIndexChanged.connect(self.load_image)  # Connectez le signal de changement de sélection de la ComboBox
+        
+    def load_image(self):
+        selected_item = self.ui.comboBox.currentText()
+        for k in pok.liste_tous_poke:
+            if selected_item == k:
+                image_path = f"interface_graphique/images/images_pokemon/pokemons_finaux/face/{k}.png" # Chemin vers l'image
         pixmap = QPixmap(image_path)
-        self.label_2.setPixmap(pixmap)
-        self.label_2.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
+        self.ui.label_2.setPixmap(pixmap)
+        self.ui.label_2.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
+ 
+        
+class RencontreDlg(QDialog):
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.ui = Ui_rencontre_pokemon_sauvage()
+        self.ui.setupUi(self)
+        coord = [MainWindow.ui.tete_perso.pos().x(),MainWindow.ui.tete_perso.pos().y()]
+        nom = MainWindow.detection(coord)
+        print(nom)
+        for k in pok.liste_tous_poke:
+            if nom == k:
+                image_path = f"interface_graphique/images/images_pokemon/pokemons_finaux/face/{k}.png" # Chemin vers l'image
+        print(image_path)
+        pixmap = QPixmap(image_path)
+        self.ui.pokemon_sauvage.setPixmap(pixmap)
+        self.ui.pokemon_sauvage.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
+    
 
 
 

@@ -11,11 +11,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+class Ui_fond_combat(object):
+    def setupUi(self, fond_combat_):
+        fond_combat_.setObjectName("fond_combat_")
+        fond_combat_.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(fond_combat_)
         self.centralwidget.setObjectName("centralwidget")
         self.fond_combat = QtWidgets.QLabel(self.centralwidget)
         self.fond_combat.setGeometry(QtCore.QRect(0, -8, 791, 581))
@@ -43,23 +43,23 @@ class Ui_MainWindow(object):
         self.barre_vie_pokemon_sauvage_2.setProperty("value", 24)
         self.barre_vie_pokemon_sauvage_2.setInvertedAppearance(False)
         self.barre_vie_pokemon_sauvage_2.setObjectName("barre_vie_pokemon_sauvage_2")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        fond_combat_.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(fond_combat_)
         self.menubar.setEnabled(True)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
         self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        fond_combat_.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(fond_combat_)
         self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+        fond_combat_.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(fond_combat_)
+        QtCore.QMetaObject.connectSlotsByName(fond_combat_)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, fond_combat_):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.nom_pokemon_sauvage.setText(_translate("MainWindow", " Pokémon sauvage"))
-        self.barre_vie_pokemon_sauvage.setFormat(_translate("MainWindow", "%p%"))
-        self.nom_mon_pokemon.setText(_translate("MainWindow", " Mon pokémon"))
-        self.barre_vie_pokemon_sauvage_2.setFormat(_translate("MainWindow", "%p%"))
+        fond_combat_.setWindowTitle(_translate("fond_combat_", "Dialog"))
+        self.nom_pokemon_sauvage.setText(_translate("fond_combat_", " Pokémon sauvage"))
+        self.barre_vie_pokemon_sauvage.setFormat(_translate("fond_combat_", "%p%"))
+        self.nom_mon_pokemon.setText(_translate("fond_combat_", " Mon pokémon"))
+        self.barre_vie_pokemon_sauvage_2.setFormat(_translate("fond_combat_", "%p%"))

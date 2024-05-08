@@ -11,11 +11,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(800, 600)
-        self.centralwidget = QtWidgets.QWidget(Dialog)
+class Ui_ecran_triple(object):
+    def setupUi(self, ecran_triple):
+        ecran_triple.setObjectName("ecran_triple")
+        ecran_triple.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(ecran_triple)
         self.centralwidget.setObjectName("centralwidget")
         self.bouton_attaque = QtWidgets.QPushButton(self.centralwidget)
         self.bouton_attaque.setGeometry(QtCore.QRect(30, 100, 321, 61))
@@ -54,21 +54,21 @@ class Ui_Dialog(object):
         self.bouton_changer_pokemon.raise_()
         self.bouton_fuir.raise_()
         self.perso.raise_()
-        Dialog.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(Dialog)
+        ecran_triple.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(ecran_triple)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
         self.menubar.setObjectName("menubar")
-        Dialog.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(Dialog)
+        ecran_triple.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(ecran_triple)
         self.statusbar.setObjectName("statusbar")
-        Dialog.setStatusBar(self.statusbar)
+        ecran_triple.setStatusBar(self.statusbar)
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(ecran_triple)
+        QtCore.QMetaObject.connectSlotsByName(ecran_triple)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, ecran_triple):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.bouton_attaque.setText(_translate("MainWindow", "Attaque"))
-        self.bouton_changer_pokemon.setText(_translate("MainWindow", "Changer de pokemon"))
-        self.bouton_fuir.setText(_translate("MainWindow", "Fuir"))
+        ecran_triple.setWindowTitle(_translate("ecran_triple", "Dialog"))
+        self.bouton_attaque.setText(_translate("ecran_triple", "Attaque"))
+        self.bouton_changer_pokemon.setText(_translate("ecran_triple", "Changer de pokemon"))
+        self.bouton_fuir.setText(_translate("ecran_triple", "Fuir"))

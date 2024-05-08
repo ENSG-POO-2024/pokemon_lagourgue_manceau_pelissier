@@ -11,11 +11,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(600, 386)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+class Ui_choix_pokemon(object):
+    def setupUi(self, choix_pokemon):
+        choix_pokemon.setObjectName("choix_pokemon")
+        choix_pokemon.resize(600, 386)
+        self.centralwidget = QtWidgets.QWidget(choix_pokemon)
         self.centralwidget.setObjectName("centralwidget")
         self.txt_choix_pokemon = QtWidgets.QLabel(self.centralwidget)
         self.txt_choix_pokemon.setGeometry(QtCore.QRect(10, 10, 321, 71))
@@ -73,22 +73,22 @@ class Ui_MainWindow(object):
         self.ok.raise_()
         self.perso_qui_court.raise_()
         self.image_pokemon.raise_()
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        choix_pokemon.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(choix_pokemon)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 600, 21))
         self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        choix_pokemon.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(choix_pokemon)
         self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+        choix_pokemon.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(choix_pokemon)
+        QtCore.QMetaObject.connectSlotsByName(choix_pokemon)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, choix_pokemon):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.txt_choix_pokemon.setText(_translate("MainWindow", "Choix du pokémon :"))
-        self.ComboBox_choix_pokemon.setItemText(0, _translate("MainWindow", "pokémon 1"))
-        self.ComboBox_choix_pokemon.setItemText(1, _translate("MainWindow", "pokémon 2"))
-        self.ok.setText(_translate("MainWindow", "OK"))
+        choix_pokemon.setWindowTitle(_translate("choix_pokemon", "Dialog"))
+        self.txt_choix_pokemon.setText(_translate("choix_pokemon", "Choix du pokémon :"))
+        self.ComboBox_choix_pokemon.setItemText(0, _translate("choix_pokemon", "pokémon 1"))
+        self.ComboBox_choix_pokemon.setItemText(1, _translate("choix_pokemon", "pokémon 2"))
+        self.ok.setText(_translate("choix_pokemon", "OK"))

@@ -11,11 +11,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(800, 600)
-        self.centralwidget = QtWidgets.QWidget(Dialog)
+class Ui_ecran_accueil(object):
+    def setupUi(self, ecran_accueil):
+        ecran_accueil.setObjectName("ecran_accueil")
+        ecran_accueil.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(ecran_accueil)
         self.centralwidget.setObjectName("centralwidget")
         self.perso = QtWidgets.QLabel(self.centralwidget)
         self.perso.setGeometry(QtCore.QRect(500, 100, 281, 461))
@@ -41,7 +41,7 @@ class Ui_Dialog(object):
         self.aquali.setGeometry(QtCore.QRect(80, 420, 91, 91))
         self.aquali.setAutoFillBackground(False)
         self.aquali.setText("")
-        self.aquali.setPixmap(QtGui.QPixmap("images/images_pokemon/Aquali-RFVF-removebg-preview.png"))
+        self.aquali.setPixmap(QtGui.QPixmap("images/images_pokemon/Aquali.png"))
         self.aquali.setScaledContents(True)
         self.aquali.setObjectName("aquali")
         self.jigglypuff = QtWidgets.QLabel(self.centralwidget)
@@ -69,19 +69,19 @@ class Ui_Dialog(object):
         self.aquali.raise_()
         self.jigglypuff.raise_()
         self.oddish.raise_()
-        Dialog.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(Dialog)
+        ecran_accueil.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(ecran_accueil)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
         self.menubar.setObjectName("menubar")
-        Dialog.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(Dialog)
+        ecran_accueil.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(ecran_accueil)
         self.statusbar.setObjectName("statusbar")
-        Dialog.setStatusBar(self.statusbar)
+        ecran_accueil.setStatusBar(self.statusbar)
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(ecran_accueil)
+        QtCore.QMetaObject.connectSlotsByName(ecran_accueil)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, ecran_accueil):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.play.setText(_translate("MainWindow", "Play"))
+        ecran_accueil.setWindowTitle(_translate("ecran_accueil", "Dialog"))
+        self.play.setText(_translate("ecran_accueil", "Play"))

@@ -11,11 +11,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1034, 610)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+class Ui_map(object):
+    def setupUi(self, map_):
+        map_.setObjectName("map_")
+        map_.resize(1034, 610)
+        self.centralwidget = QtWidgets.QWidget(map_)
         self.centralwidget.setObjectName("centralwidget")
         self.herbe = QtWidgets.QLabel(self.centralwidget)
         self.herbe.setGeometry(QtCore.QRect(0, 0, 1031, 571))
@@ -42,19 +42,19 @@ class Ui_MainWindow(object):
         self.bouton_pokedeck.raise_()
         self.label.raise_()
         self.tete_perso.raise_()
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        map_.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(map_)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1034, 21))
         self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        map_.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(map_)
         self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+        map_.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(map_)
+        QtCore.QMetaObject.connectSlotsByName(map_)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, map_):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.bouton_pokedeck.setText(_translate("MainWindow", "Pokedeck"))
+        map_.setWindowTitle(_translate("map_", "MainWindow"))
+        self.bouton_pokedeck.setText(_translate("map_", "Pokedeck"))
