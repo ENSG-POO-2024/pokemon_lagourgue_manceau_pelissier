@@ -124,18 +124,18 @@ class PokedeckDlg(QDialog):
  
         
 class RencontreDlg(QDialog):
+    
+    # corriger nom pokémon
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_rencontre_pokemon_sauvage()
         self.ui.setupUi(self)
-        coord = [MainWindow.ui.tete_perso.pos().x(),MainWindow.ui.tete_perso.pos().y()]
-        nom = MainWindow.detection(coord)
-        print(nom)
+        coord = [window.ui.tete_perso.pos().x(),window.ui.tete_perso.pos().y()]
+        nom = window.detection(coord)
         for k in pok.liste_tous_poke:
             if nom == k:
                 image_path = f"interface_graphique/images/images_pokemon/pokemons_finaux/face/{k}.png" # Chemin vers l'image
-        print(image_path)
         pixmap = QPixmap(image_path)
         self.ui.pokemon_sauvage.setPixmap(pixmap)
         self.ui.pokemon_sauvage.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
