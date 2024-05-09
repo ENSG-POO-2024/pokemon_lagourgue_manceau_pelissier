@@ -11,43 +11,53 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_rencontre_pokemon_sauvage(object):
-    def setupUi(self, rencontre_pokemon_sauvage):
-        rencontre_pokemon_sauvage.setObjectName("rencontre_pokemon_sauvage")
-        rencontre_pokemon_sauvage.resize(442, 297)
-        self.text_pokemon_apparait = QtWidgets.QTextEdit(rencontre_pokemon_sauvage)
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(442, 297)
+        self.text_pokemon_apparait = QtWidgets.QTextEdit(Dialog)
         self.text_pokemon_apparait.setGeometry(QtCore.QRect(10, 20, 421, 41))
         self.text_pokemon_apparait.setObjectName("text_pokemon_apparait")
-        self.fond_prairie = QtWidgets.QLabel(rencontre_pokemon_sauvage)
+        self.fond_prairie = QtWidgets.QLabel(Dialog)
         self.fond_prairie.setGeometry(QtCore.QRect(-10, -20, 451, 321))
         self.fond_prairie.setText("")
-        self.fond_prairie.setPixmap(QtGui.QPixmap("interface_graphique/images/prairie_et_ciel.png"))
+        self.fond_prairie.setPixmap(QtGui.QPixmap("images/prairie_et_ciel.png"))
         self.fond_prairie.setObjectName("fond_prairie")
-        self.pokemon_sauvage = QtWidgets.QLabel(rencontre_pokemon_sauvage)
+        self.pokemon_sauvage = QtWidgets.QLabel(Dialog)
         self.pokemon_sauvage.setGeometry(QtCore.QRect(60, 90, 161, 161))
         self.pokemon_sauvage.setText("")
-        self.pokemon_sauvage.setPixmap(QtGui.QPixmap("interface_graphique/images/images_pokemon/pokemons_finaux/face/Diglett.png"))
+        self.pokemon_sauvage.setPixmap(QtGui.QPixmap("images/images_pokemon/pokemons_finaux/face/Diglett.png"))
         self.pokemon_sauvage.setScaledContents(True)
         self.pokemon_sauvage.setObjectName("pokemon_sauvage")
-        self.perso_qui_court = QtWidgets.QLabel(rencontre_pokemon_sauvage)
+        self.perso_qui_court = QtWidgets.QLabel(Dialog)
         self.perso_qui_court.setGeometry(QtCore.QRect(260, -30, 181, 331))
         self.perso_qui_court.setText("")
-        self.perso_qui_court.setPixmap(QtGui.QPixmap("interface_graphique/images/perso_attaque.png"))
+        self.perso_qui_court.setPixmap(QtGui.QPixmap("images/perso_attaque.png"))
         self.perso_qui_court.setScaledContents(True)
         self.perso_qui_court.setObjectName("perso_qui_court")
+        self.bouton_fuir = QtWidgets.QPushButton(Dialog)
+        self.bouton_fuir.setGeometry(QtCore.QRect(20, 250, 75, 23))
+        self.bouton_fuir.setObjectName("bouton_fuir")
+        self.bouton_combattre = QtWidgets.QPushButton(Dialog)
+        self.bouton_combattre.setGeometry(QtCore.QRect(120, 250, 91, 23))
+        self.bouton_combattre.setObjectName("bouton_combattre")
         self.fond_prairie.raise_()
         self.pokemon_sauvage.raise_()
         self.perso_qui_court.raise_()
         self.text_pokemon_apparait.raise_()
+        self.bouton_fuir.raise_()
+        self.bouton_combattre.raise_()
 
-        self.retranslateUi(rencontre_pokemon_sauvage)
-        QtCore.QMetaObject.connectSlotsByName(rencontre_pokemon_sauvage)
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-    def retranslateUi(self, rencontre_pokemon_sauvage):
+    def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        rencontre_pokemon_sauvage.setWindowTitle(_translate("rencontre_pokemon_sauvage", "Détection d'un pokémon !"))
-        self.text_pokemon_apparait.setHtml(_translate("rencontre_pokemon_sauvage", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.text_pokemon_apparait.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt;\">f'Un {nom_pokémon} sauvage apparaît !'</span></p></body></html>"))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt;\">Un nom_pokémon sauvage apparaît !</span></p></body></html>"))
+        self.bouton_fuir.setText(_translate("Dialog", "fuir"))
+        self.bouton_combattre.setText(_translate("Dialog", "COMBATTRE !"))

@@ -84,7 +84,7 @@ p, li { white-space: pre-wrap; }
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="bouton_fuir">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -97,7 +97,7 @@ p, li { white-space: pre-wrap; }
     <string>fuir</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="bouton_combattre">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -114,8 +114,8 @@ p, li { white-space: pre-wrap; }
   <zorder>pokemon_sauvage</zorder>
   <zorder>perso_qui_court</zorder>
   <zorder>text_pokemon_apparait</zorder>
-  <zorder>pushButton</zorder>
-  <zorder>pushButton_2</zorder>
+  <zorder>bouton_fuir</zorder>
+  <zorder>bouton_combattre</zorder>
  </widget>
  <resources/>
  <connections/>
