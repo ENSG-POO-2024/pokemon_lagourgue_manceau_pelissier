@@ -138,11 +138,15 @@ class RencontreDlg(QDialog):
                 image_path = f"interface_graphique/images/images_pokemon/pokemons_finaux/face/{k}.png" # Chemin vers l'image
                 nom_poke_sauvage = k
         pixmap = QPixmap(image_path)
-        self.ui.label.setText(f"Un {nom_poke_sauvage} sauvage apparaît !")
+        
         self.ui.pokemon_sauvage.setPixmap(pixmap)
         self.ui.pokemon_sauvage.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
+        self.ui.label.setText(f"Un {nom_poke_sauvage} sauvage apparaît !")
+        self.ui.bouton_fuir.clicked.connect(self.fuir) #relie l'action au bouton fuir
     
-
+    
+    def fuir(self):
+        self.close() #retour à la mainWindow, la carte
 
 
 
