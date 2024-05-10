@@ -143,11 +143,33 @@ class RencontreDlg(QDialog):
         self.ui.pokemon_sauvage.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
         self.ui.label.setText(f"Un {nom_poke_sauvage} sauvage apparaît !")
         self.ui.bouton_fuir.clicked.connect(self.fuir) #relie l'action au bouton fuir
-    
+        self.ui.bouton_combattre.clicked.connect(self.choix_combat)  #relie l'action au bouton combattre
     
     def fuir(self):
         self.close() #retour à la mainWindow, la carte
-
+        
+    def choix_combat(self):
+        #ouvre la boite de dialogue avec les 3 choix
+        dialog = Dlg_choix_action()
+        dialog.exec_()  # Affichez la boîte de dialogue de manière modale
+        self.ui.tete_perso.setFocus()
+        
+class Dlg_choix_action(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.ui = Ui_ecran_triple()
+        self.ui.setupUi(self) #l'argument self est utilisé comme widget parent
+        
+        self.ui.bouton_fuir.clicked.connect(self.close)
+        self.ui.bouton_attaque.clicked.connect(self.attaquer)
+        self.ui.bouton_changer_pokemon.clicked.connect(self.changer)
+        
+        
+    def changer(self):
+        pass
+            
+    def attaquer(self):
+        pass
 
 
 if __name__ == "__main__":
