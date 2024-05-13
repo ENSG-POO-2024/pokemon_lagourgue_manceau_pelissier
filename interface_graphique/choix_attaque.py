@@ -20,7 +20,7 @@ class Ui_choix_attaque(object):
         self.image_fond = QtWidgets.QLabel(self.centralwidget)
         self.image_fond.setGeometry(QtCore.QRect(-60, -10, 831, 591))
         self.image_fond.setText("")
-        self.image_fond.setPixmap(QtGui.QPixmap("images/prairie_et_ciel.png"))
+        self.image_fond.setPixmap(QtGui.QPixmap("interface_graphique/images/prairie_et_ciel.png"))
         self.image_fond.setScaledContents(True)
         self.image_fond.setObjectName("image_fond")
         self.bouton_att_spe = QtWidgets.QPushButton(self.centralwidget)
@@ -63,21 +63,21 @@ class Ui_choix_attaque(object):
         font.setPointSize(12)
         self.nbr_degat_att_neutre.setFont(font)
         self.nbr_degat_att_neutre.setObjectName("nbr_degat_att_neutre")
-        choix_attaque.setCentralWidget(self.centralwidget)
+        """choix_attaque.setCentralWidget(self.centralwidget)"""
         # self.menubar = QtWidgets.QMenuBar(Dialog)
         # self.menubar.setGeometry(QtCore.QRect(0, 0, 736, 21))
         # self.menubar.setObjectName("menubar")
         # MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(choix_attaque)
         self.statusbar.setObjectName("statusbar")
-        choix_attaque.setStatusBar(self.statusbar)
+        """choix_attaque.setStatusBar(self.statusbar)"""
 
         self.retranslateUi(choix_attaque)
         QtCore.QMetaObject.connectSlotsByName(choix_attaque)
 
     def retranslateUi(self, choix_attaque):
         _translate = QtCore.QCoreApplication.translate
-        choix_attaque.setWindowTitle(_translate("choix_attaque", "Dialog"))
+        choix_attaque.setWindowTitle(_translate("choix_attaque", "Choisis ton attaque !"))
         self.bouton_att_spe.setText(_translate("choix_attaque", "Attaque spéciale"))
         self.bouton_att_neutre.setText(_translate("choix_attaque", "Attaque neutre"))
         self.txt_degats_att_spe.setText(_translate("choix_attaque", "Dégats inffligés :              HP"))

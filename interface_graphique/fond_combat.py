@@ -43,15 +43,15 @@ class Ui_fond_combat(object):
         self.barre_vie_pokemon_sauvage_2.setProperty("value", 24)
         self.barre_vie_pokemon_sauvage_2.setInvertedAppearance(False)
         self.barre_vie_pokemon_sauvage_2.setObjectName("barre_vie_pokemon_sauvage_2")
-        fond_combat_.setCentralWidget(self.centralwidget)
+        """fond_combat_.setCentralWidget(self.centralwidget)"""
         self.menubar = QtWidgets.QMenuBar(fond_combat_)
         self.menubar.setEnabled(True)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
         self.menubar.setObjectName("menubar")
-        fond_combat_.setMenuBar(self.menubar)
+        """fond_combat_.setMenuBar(self.menubar)"""
         self.statusbar = QtWidgets.QStatusBar(fond_combat_)
         self.statusbar.setObjectName("statusbar")
-        fond_combat_.setStatusBar(self.statusbar)
+        """fond_combat_.setStatusBar(self.statusbar)"""
 
         self.retranslateUi(fond_combat_)
         QtCore.QMetaObject.connectSlotsByName(fond_combat_)
