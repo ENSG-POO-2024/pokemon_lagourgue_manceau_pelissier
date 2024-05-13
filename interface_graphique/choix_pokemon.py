@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_choix_pokemon(object):
     def setupUi(self, choix_pokemon):
-        self.poke_choisi = 'Bulbasaur'
+        self.pokemon_choisi = 'Bulbasaur'
         choix_pokemon.setObjectName("choix_pokemon")
         choix_pokemon.resize(600, 386)
         self.centralwidget = QtWidgets.QWidget(choix_pokemon)

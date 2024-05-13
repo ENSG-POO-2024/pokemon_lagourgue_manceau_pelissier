@@ -119,8 +119,8 @@ class PokedeckDlg(QDialog):
             if selected_item == k:
                 image_path = f"interface_graphique/images/images_pokemon/pokemons_finaux/face/{k}.png" # Chemin vers l'image
         pixmap = QPixmap(image_path)
-        self.ui.label_2.setPixmap(pixmap)
-        self.ui.label_2.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
+        self.ui.image_poke.setPixmap(pixmap)
+        self.ui.image_poke.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
  
         
 class RencontreDlg(QDialog):
@@ -130,15 +130,15 @@ class RencontreDlg(QDialog):
         self.ui = Ui_rencontre_pokemon_sauvage()
         self.ui.setupUi(self)
         coord = [window.ui.tete_perso.pos().x(),window.ui.tete_perso.pos().y()]
-        nom = window.detection(coord)
-        self.nom = nom
+        pokemon_sauvage = window.detection(coord)
+        self.poke_sauvage = pokemon_sauvage
         for k in pok.liste_tous_poke:
-            if nom == k:
+            if pokemon_sauvage == k:
                 image_path = f"interface_graphique/images/images_pokemon/pokemons_finaux/face/{k}.png" # Chemin vers l'image
         pixmap = QPixmap(image_path)
         self.ui.pokemon_sauvage.setPixmap(pixmap)
         self.ui.pokemon_sauvage.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
-        self.ui.label.setText(f"Un {nom} sauvage apparaît !")
+        self.ui.txt_poke_apparait.setText(f"Un {pokemon_sauvage} sauvage apparaît !")
         self.ui.bouton_fuir.clicked.connect(self.fuir) #relie l'action au bouton fuir
         self.ui.bouton_combattre.clicked.connect(self.open_dialog_choix_pokemon)  #relie l'action au bouton combattre
     
@@ -146,7 +146,7 @@ class RencontreDlg(QDialog):
         self.close() #retour à la mainWindow, la carte
         
     def open_dialog_choix_pokemon(self):
-        classe_choix_pokemon = ChoixPokemonDlg()
+        classe_choix_pokemon = ChoixPokemonDlg(pokemon_sauvage=self.poke_sauvage)
         classe_choix_pokemon.exec_()  # Affichez la boîte de dialogue de manière modale
         self.close()
         window.ui.tete_perso.setFocus()
@@ -154,14 +154,29 @@ class RencontreDlg(QDialog):
         
 class ChoixPokemonDlg(QDialog):
     
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, pokemon_sauvage='defaut'):
         super().__init__(parent)
         self.ui = Ui_choix_pokemon()
         self.ui.setupUi(self) #l'argument self est utilisé comme widget parent
+        self.pokemon_sauvage = pokemon_sauvage
         self.ui.ComboBox_choix_pokemon.currentIndexChanged.connect(self.load_image) # Connectez le signal de changement de sélection de la ComboBox
-        pokemon_choisi = self.ui.poke_choisi
-        pokemon_sauvage = 1
-        print(pokemon_sauvage)
+        self.ui.ok.clicked.connect(self.open_next_dialog)
+        
+    def open_next_dialog(self):
+        vitesse_poke_choisi = pok.dico_poke[self.ui.pokemon_choisi].speed 
+        vitesse_poke_sauvage = pok.dico_poke[self.pokemon_sauvage].speed
+        print(self.ui.pokemon_choisi,self.pokemon_sauvage)
+        print(vitesse_poke_choisi,vitesse_poke_sauvage)
+        if vitesse_poke_choisi >= vitesse_poke_sauvage:
+            classe_choix_attaque = ChoixAttaqueDlg()
+            classe_choix_attaque.exec_()  # Affichez la boîte de dialogue de manière modale
+            self.close()
+            window.ui.tete_perso.setFocus()
+        else:
+            classe_fond_combat = FondCombatDlg()
+            classe_fond_combat.exec_()  # Affichez la boîte de dialogue de manière modale
+            self.close()
+            window.ui.tete_perso.setFocus()
         
     def load_image(self):
         selected_item = self.ui.ComboBox_choix_pokemon.currentText()
@@ -171,13 +186,8 @@ class ChoixPokemonDlg(QDialog):
         pixmap = QPixmap(image_path)
         self.ui.image_pokemon.setPixmap(pixmap)
         self.ui.image_pokemon.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
-        self.poke_choisi = self.ui.ComboBox_choix_pokemon.currentText()
+        self.ui.pokemon_choisi = self.ui.ComboBox_choix_pokemon.currentText()
         
-    def open_dialog_choix_attaque(self):
-        classe_choix_attaque = ChoixAttaqueDlg()
-        classe_choix_attaque.exec_()  # Affichez la boîte de dialogue de manière modale
-        self.close()
-        window.ui.tete_perso.setFocus()
         
         
 class ChoixAttaqueDlg(QDialog):
