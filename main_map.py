@@ -165,14 +165,14 @@ class ChoixPokemonDlg(QDialog):
     def open_next_dialog(self):
         vitesse_poke_choisi = pok.dico_poke[self.ui.pokemon_choisi].speed 
         vitesse_poke_sauvage = pok.dico_poke[self.pokemon_sauvage].speed
-        print(self.ui.pokemon_choisi,self.pokemon_sauvage)
-        print(vitesse_poke_choisi,vitesse_poke_sauvage)
         if vitesse_poke_choisi >= vitesse_poke_sauvage:
-            classe_choix_attaque = ChoixAttaqueDlg()
+            print('attaque')
+            classe_choix_attaque = ChoixAttaqueDlg(pokemon_choisi=,pokemon_sauvage)
             classe_choix_attaque.exec_()  # Affichez la boîte de dialogue de manière modale
             self.close()
             window.ui.tete_perso.setFocus()
         else:
+            print('fond combat')
             classe_fond_combat = FondCombatDlg()
             classe_fond_combat.exec_()  # Affichez la boîte de dialogue de manière modale
             self.close()
@@ -191,11 +191,21 @@ class ChoixPokemonDlg(QDialog):
         
         
 class ChoixAttaqueDlg(QDialog):
-    pass
-
+    
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.ui = Ui_choix_attaque()
+        self.ui.setupUi(self) #l'argument self est utilisé comme widget parent
+        self.ui.nbr_degat_att_neutre.setText(f"")
+        self.ui.nbr_degat_att_spe.setText(f"")
+        
 
 class FondCombatDlg(QDialog):
-    pass       
+    
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.ui = Ui_fond_combat()
+        self.ui.setupUi(self) #l'argument self est utilisé comme widget parent
         
 
 

@@ -1,34 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri May  3 13:44:26 2024
-
-@author: elago
-"""
-import pandas as pd
-import os
-import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QDialog
-from gestion_des_pokemons.pokemons import  *
-from interface_graphique.choix_attaque import Ui_Dialog as Choix_attaques_diag
-from interface_graphique.ecran_triple import Ui_Dialog as Ecran_triple_diag
-from interface_graphique.pokedeck import Ui_pokedeck as Pokedeck
-#from interface_graphique.debut_combat import Ui_Dialog as Choix_poke_fuite
-import random as rand
-
-
-          
-
-class Dialogue_choix_poke(QDialog):
-    
-    
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        #self.ui = Ui_Boite_Dialogue
-        #self.ok.clicked_connect(self.accept)
-    
-    def accept(self):
-        pass
-    pass            
+         
         
 class Dialogue_attaque(QDialog):
     def __init__(self,points, parent=None):
@@ -81,12 +51,7 @@ class Dlg_choix_action(QDialog):
     
 class Main(QMainWindow): #dans main_map, à récupérer
     
-    def Move(self):
-        if revelation(self.ui.tete_perso.pos()) != None:
-            dlg_début = Choix_poke_fuite()
-            dlg_début.exxec()
-            self.Combattre(dico_poke[revelation(self.ui.tete_perso.pos())])
-        pass
+
     def Combattre(self,sauvage):
         """
         modélise les choix du joueur face à un pokémon sauvage
@@ -150,11 +115,3 @@ class Main(QMainWindow): #dans main_map, à récupérer
                 self.pokedeck.addItem( pokemon)
         # afficher vous avez perdu
                 
-   
-
-    
-        
-        
-
-if __name__ == "__main__":
-    print(dico_poke['Venonat'])
