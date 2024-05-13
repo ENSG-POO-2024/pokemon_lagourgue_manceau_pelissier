@@ -148,6 +148,13 @@
     <string>YY</string>
    </property>
   </widget>
+  <zorder>image_fond</zorder>
+  <zorder>bouton_att_spe</zorder>
+  <zorder>bouton_att_neutre</zorder>
+  <zorder>txt_degats_att_spe</zorder>
+  <zorder>txt_degats_att_neutre</zorder>
+  <zorder>nbr_degat_att_spe</zorder>
+  <zorder>nbr_degat_att_neutre</zorder>
  </widget>
  <resources/>
  <connections/>
