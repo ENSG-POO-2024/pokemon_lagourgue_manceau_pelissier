@@ -18,7 +18,7 @@ class Ui_choix_attaque(object):
         self.image_fond = QtWidgets.QLabel(Choix_attaque)
         self.image_fond.setGeometry(QtCore.QRect(-10, -30, 831, 591))
         self.image_fond.setText("")
-        self.image_fond.setPixmap(QtGui.QPixmap("images/prairie_et_ciel.png"))
+        self.image_fond.setPixmap(QtGui.QPixmap("interface_graphique/images/prairie_et_ciel.png"))
         self.image_fond.setScaledContents(True)
         self.image_fond.setObjectName("image_fond")
         self.bouton_att_spe = QtWidgets.QPushButton(Choix_attaque)
@@ -77,13 +77,10 @@ class Ui_choix_attaque(object):
         Choix_attaque.setWindowTitle(_translate("Choix_attaque", "Dialog"))
         self.bouton_att_spe.setText(_translate("Choix_attaque", "Attaque spéciale"))
         self.bouton_att_neutre.setText(_translate("Choix_attaque", "Attaque neutre"))
-<<<<<<< HEAD
         self.txt_degats_att_spe.setText(_translate("Choix_attaque", "Dégats infligés :              HP"))
         self.nbr_degat_att_spe.setText(_translate("Choix_attaque", "XX"))
         self.txt_degats_att_neutre.setText(_translate("Choix_attaque", "Dégats infligés :              HP"))
-=======
         self.txt_degats_att_spe.setText(_translate("Choix_attaque", "Dégats infligés :  "))
         self.nbr_degat_att_spe.setText(_translate("Choix_attaque", "XX"))
         self.txt_degats_att_neutre.setText(_translate("Choix_attaque", "Dégats infligés :"))
->>>>>>> 2180c2df165d08b38d58fb9365398e6ebed1cb36
         self.nbr_degat_att_neutre.setText(_translate("Choix_attaque", "YY"))
