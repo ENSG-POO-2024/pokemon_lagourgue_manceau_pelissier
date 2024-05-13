@@ -9,7 +9,7 @@ from interface_graphique.pokedeck import Ui_pokedeck
 from interface_graphique.rencontre_pokemon_sauvage import Ui_rencontre_pokemon_sauvage
 from interface_graphique.choix_pokemon import Ui_choix_pokemon
 from interface_graphique.choix_attaque import Ui_choix_attaque
-from interface_graphique.fond_combat import Ui_fond_combat
+from interface_graphique.fond_combat import Ui_arene_de_combat
 from interface_graphique.ecran_triple import Ui_ecran_triple
 import random as rand
 import numpy as np
@@ -131,7 +131,7 @@ class RencontreDlg(QDialog):
         self.ui.setupUi(self)
         coord = [window.ui.tete_perso.pos().x(),window.ui.tete_perso.pos().y()]
         pokemon_sauvage = window.detection(coord)
-        self.poke_sauvage = pokemon_sauvage
+        self.pokemon_sauvage = pokemon_sauvage
         for k in pok.liste_tous_poke:
             if pokemon_sauvage == k:
                 image_path = f"interface_graphique/images/images_pokemon/pokemons_finaux/face/{k}.png" # Chemin vers l'image
@@ -146,7 +146,7 @@ class RencontreDlg(QDialog):
         self.close() #retour à la mainWindow, la carte
         
     def open_dialog_choix_pokemon(self):
-        classe_choix_pokemon = ChoixPokemonDlg(pokemon_sauvage=self.poke_sauvage)
+        classe_choix_pokemon = ChoixPokemonDlg(pokemon_sauvage=self.pokemon_sauvage)
         classe_choix_pokemon.exec_()  # Affichez la boîte de dialogue de manière modale
         self.close()
         window.ui.tete_perso.setFocus()
@@ -167,13 +167,13 @@ class ChoixPokemonDlg(QDialog):
         vitesse_poke_sauvage = pok.dico_poke[self.pokemon_sauvage].speed
         if vitesse_poke_choisi >= vitesse_poke_sauvage:
             print('attaque')
-            classe_choix_attaque = ChoixAttaqueDlg(pokemon_choisi=,pokemon_sauvage)
+            classe_choix_attaque = ChoixAttaqueDlg(pokemon_choisi=self.ui.pokemon_choisi,pokemon_sauvage=self.pokemon_sauvage)
             classe_choix_attaque.exec_()  # Affichez la boîte de dialogue de manière modale
             self.close()
             window.ui.tete_perso.setFocus()
         else:
             print('fond combat')
-            classe_fond_combat = FondCombatDlg()
+            classe_fond_combat = FondCombatDlg(pokemon_choisi=self.ui.pokemon_choisi,pokemon_sauvage=self.pokemon_sauvage)
             classe_fond_combat.exec_()  # Affichez la boîte de dialogue de manière modale
             self.close()
             window.ui.tete_perso.setFocus()
@@ -192,10 +192,12 @@ class ChoixPokemonDlg(QDialog):
         
 class ChoixAttaqueDlg(QDialog):
     
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, pokemon_choisi='défaut',pokemon_sauvage='défaut'):
         super().__init__(parent)
         self.ui = Ui_choix_attaque()
         self.ui.setupUi(self) #l'argument self est utilisé comme widget parent
+        self.pokemon_choisi = pokemon_choisi
+        self.pokemon_sauvage = pokemon_sauvage
         self.ui.nbr_degat_att_neutre.setText(f"")
         self.ui.nbr_degat_att_spe.setText(f"")
         

@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Arene_de_combat(object):
+class Ui_arene_de_combat(object):
     def setupUi(self, Arene_de_combat):
         Arene_de_combat.setObjectName("Arene_de_combat")
         Arene_de_combat.resize(752, 509)

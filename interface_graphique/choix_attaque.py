@@ -11,14 +11,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Choix_attaque(object):
+class Ui_choix_attaque(object):
     def setupUi(self, Choix_attaque):
         Choix_attaque.setObjectName("Choix_attaque")
         Choix_attaque.resize(741, 212)
         self.image_fond = QtWidgets.QLabel(Choix_attaque)
         self.image_fond.setGeometry(QtCore.QRect(-10, -30, 831, 591))
         self.image_fond.setText("")
-        self.image_fond.setPixmap(QtGui.QPixmap("images/prairie_et_ciel.png"))
+        self.image_fond.setPixmap(QtGui.QPixmap("interface_graphique/images/prairie_et_ciel.png"))
         self.image_fond.setScaledContents(True)
         self.image_fond.setObjectName("image_fond")
         self.bouton_att_spe = QtWidgets.QPushButton(Choix_attaque)
@@ -67,7 +67,7 @@ class Ui_Choix_attaque(object):
 
     def retranslateUi(self, Choix_attaque):
         _translate = QtCore.QCoreApplication.translate
-        Choix_attaque.setWindowTitle(_translate("Choix_attaque", "Dialog"))
+        Choix_attaque.setWindowTitle(_translate("Choix_attaque", "Choisis ton attaque !"))
         self.bouton_att_spe.setText(_translate("Choix_attaque", "Attaque spéciale"))
         self.bouton_att_neutre.setText(_translate("Choix_attaque", "Attaque neutre"))
         self.txt_degats_att_spe.setText(_translate("Choix_attaque", "Dégats inffligés :              HP"))
