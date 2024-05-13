@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Choix_attaque(object):
+class Ui_choix_attaque(object):
     def setupUi(self, Choix_attaque):
         Choix_attaque.setObjectName("Choix_attaque")
         Choix_attaque.resize(741, 212)
