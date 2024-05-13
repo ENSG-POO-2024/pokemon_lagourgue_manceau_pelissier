@@ -13,6 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_choix_pokemon(object):
     def setupUi(self, choix_pokemon):
+        self.poke_choisi = 'Bulbasaur'
         choix_pokemon.setObjectName("choix_pokemon")
         choix_pokemon.resize(600, 386)
         self.centralwidget = QtWidgets.QWidget(choix_pokemon)
@@ -42,6 +43,7 @@ class Ui_choix_pokemon(object):
         self.ComboBox_choix_pokemon.setObjectName("ComboBox_choix_pokemon")
         self.ComboBox_choix_pokemon.addItem("")
         self.ComboBox_choix_pokemon.addItem("")
+        self.ComboBox_choix_pokemon.addItem("")
         self.ok = QtWidgets.QPushButton(self.centralwidget)
         self.ok.setGeometry(QtCore.QRect(260, 110, 91, 41))
         font = QtGui.QFont()
@@ -52,19 +54,19 @@ class Ui_choix_pokemon(object):
         self.fond_ciel_bleu = QtWidgets.QLabel(self.centralwidget)
         self.fond_ciel_bleu.setGeometry(QtCore.QRect(0, -20, 821, 521))
         self.fond_ciel_bleu.setText("")
-        self.fond_ciel_bleu.setPixmap(QtGui.QPixmap("images/prairie_et_ciel.png"))
+        self.fond_ciel_bleu.setPixmap(QtGui.QPixmap("interface_graphique/images/prairie_et_ciel.png"))
         self.fond_ciel_bleu.setScaledContents(True)
         self.fond_ciel_bleu.setObjectName("fond_ciel_bleu")
         self.perso_qui_court = QtWidgets.QLabel(self.centralwidget)
         self.perso_qui_court.setGeometry(QtCore.QRect(380, -30, 201, 371))
         self.perso_qui_court.setText("")
-        self.perso_qui_court.setPixmap(QtGui.QPixmap("images/perso_attaque.png"))
+        self.perso_qui_court.setPixmap(QtGui.QPixmap("interface_graphique/images/perso_attaque.png"))
         self.perso_qui_court.setScaledContents(True)
         self.perso_qui_court.setObjectName("perso_qui_court")
         self.image_pokemon = QtWidgets.QLabel(self.centralwidget)
         self.image_pokemon.setGeometry(QtCore.QRect(40, 170, 181, 161))
         self.image_pokemon.setText("")
-        self.image_pokemon.setPixmap(QtGui.QPixmap("images/images_pokemon/pokemons_finaux/face/Bulbasaur.png"))
+        self.image_pokemon.setPixmap(QtGui.QPixmap("interface_graphique/images/images_pokemon/pokemons_finaux/face/Bulbasaur.png"))
         self.image_pokemon.setScaledContents(True)
         self.image_pokemon.setObjectName("image_pokemon")
         self.fond_ciel_bleu.raise_()
@@ -73,22 +75,23 @@ class Ui_choix_pokemon(object):
         self.ok.raise_()
         self.perso_qui_court.raise_()
         self.image_pokemon.raise_()
-        choix_pokemon.setCentralWidget(self.centralwidget)
+        """choix_pokemon.setCentralWidget(self.centralwidget)"""
         self.menubar = QtWidgets.QMenuBar(choix_pokemon)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 600, 21))
         self.menubar.setObjectName("menubar")
-        choix_pokemon.setMenuBar(self.menubar)
+        """choix_pokemon.setMenuBar(self.menubar)"""
         self.statusbar = QtWidgets.QStatusBar(choix_pokemon)
         self.statusbar.setObjectName("statusbar")
-        choix_pokemon.setStatusBar(self.statusbar)
+        """choix_pokemon.setStatusBar(self.statusbar)"""
 
         self.retranslateUi(choix_pokemon)
         QtCore.QMetaObject.connectSlotsByName(choix_pokemon)
 
     def retranslateUi(self, choix_pokemon):
         _translate = QtCore.QCoreApplication.translate
-        choix_pokemon.setWindowTitle(_translate("choix_pokemon", "Dialog"))
+        choix_pokemon.setWindowTitle(_translate("choix_pokemon", "Choix du pokémon"))
         self.txt_choix_pokemon.setText(_translate("choix_pokemon", "Choix du pokémon :"))
-        self.ComboBox_choix_pokemon.setItemText(0, _translate("choix_pokemon", "pokémon 1"))
-        self.ComboBox_choix_pokemon.setItemText(1, _translate("choix_pokemon", "pokémon 2"))
+        self.ComboBox_choix_pokemon.setItemText(0, _translate("choix_pokemon", "Bulbasaur"))
+        self.ComboBox_choix_pokemon.setItemText(1, _translate("choix_pokemon", "Squirtle"))
+        self.ComboBox_choix_pokemon.setItemText(2, _translate("choix_pokemon", "Charmander"))
         self.ok.setText(_translate("choix_pokemon", "OK"))
