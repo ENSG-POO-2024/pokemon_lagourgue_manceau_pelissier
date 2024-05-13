@@ -34,6 +34,22 @@ class MainWindow(QMainWindow):
         self.ui.bouton_pokedeck.clicked.connect(self.open_dialog_Pokedeck)
         
     def eventFilter(self, source, event):
+        """
+        Repère quand on appuie sur les touches du clavier
+
+        Parameters
+        ----------
+        source : TYPE
+            DESCRIPTION.
+        event : TYPE
+            DESCRIPTION.
+
+        Returns
+        -------
+        TYPE: boolean
+            DESCRIPTION.
+
+        """
         if event.type() == QEvent.KeyPress:
             key = event.key()
             if key == Qt.Key_Left:
@@ -51,6 +67,21 @@ class MainWindow(QMainWindow):
         return super().eventFilter(source, event)
 
     def move_square(self, dx, dy):
+        """
+        Affiche le déplacement du personnage dans les limites de l'image
+
+        Parameters
+        ----------
+        dx : TYPE
+            DESCRIPTION.
+        dy : TYPE
+            DESCRIPTION.
+
+        Returns
+        -------
+        None.
+
+        """
         square_pos = self.ui.tete_perso.pos()
         new_pos = square_pos + QPoint(dx, dy)
     
@@ -86,11 +117,41 @@ class MainWindow(QMainWindow):
             self.ui.tete_perso.setFocus()
                                  
     def calcul_distance_poke(self,coord,nom_poke):
+        """
+        Calcule la distance entre chaque pokemon présents et le personnage
+
+        Parameters
+        ----------
+        coord : TYPE liste
+            DESCRIPTION. contient l'ordonnée et l'abscisse du personnage
+        nom_poke : TYPE
+            DESCRIPTION.
+
+        Returns
+        -------
+        TYPE
+            DESCRIPTION.
+
+        """
         if pok.dico_poke[nom_poke].coordX == 'pokédeck':
             return 1000
         return np.sqrt((coord[0] - pok.dico_poke[nom_poke].coordX)**2 + (coord[1] - pok.dico_poke[nom_poke].coordY)**2)
 
     def detection(self,coord):
+        """
+        Cherche si le personnage est dans la zone de détection
+
+        Parameters
+        ----------
+        coord : TYPE liste
+            DESCRIPTION.
+
+        Returns
+        -------
+        k : TYPE 
+            DESCRIPTION. nom du pokémon
+
+        """
         distance_detection = 50
         for k in pok.liste_tous_poke:
             dist = self.calcul_distance_poke(coord,k)
@@ -216,30 +277,90 @@ class ChoixAttaqueDlg(QDialog):
         self.ui.bouton_att_spe.clicked.connect(self.open_dialog_atk_spe)
         
     def open_dialog_atk_neutre(self):
+        nb_degats = int(self.ui.nbr_degat_att_neutre.text())
         classe_fond_combat = FondCombatDlg(pokemon_choisi=self.ui.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
-                                               choisiHP=self.choisiHP, sauvageHP=self.sauvageHP)
+                                               choisiHP=self.choisiHP, sauvageHP=self.sauvageHP, nb_degats = nb_degats)
         classe_fond_combat.exec_()  # Affichez la boîte de dialogue de manière modale
         self.close()
         window.ui.tete_perso.setFocus()
         
     def open_dialog_atk_spe(self):
+        nb_degats = int(self.ui.nbr_degat_att_spe.text())
         classe_fond_combat = FondCombatDlg(pokemon_choisi=self.ui.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
-                                               choisiHP=self.choisiHP, sauvageHP=self.sauvageHP)
+                                               choisiHP=self.choisiHP, sauvageHP=self.sauvageHP, nb_degats = nb_degats)
         classe_fond_combat.exec_()  # Affichez la boîte de dialogue de manière modale
         self.close()
         window.ui.tete_perso.setFocus()
+        
         
     
         
 
 class FondCombatDlg(QDialog):
     
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, pokemon_choisi='défaut', pokemon_sauvage='défaut', choisiHP='défaut', sauvageHP='défaut', nb_degats= 'defaut'):
         super().__init__(parent)
         self.ui = Ui_arene_de_combat()
         self.ui.setupUi(self) #l'argument self est utilisé comme widget parent
-        
+        self.pokemon_choisi = pokemon_choisi
+        self.pokemon_sauvage = pokemon_sauvage
+        self.choisiHP = choisiHP
+        self.sauvageHP = sauvageHP
+        self.nb_degats = nb_degats
+        obj_pokemon_choisi = pok.dico_poke[self.pokemon_choisi]
+        obj_pokemon_sauvage = pok.dico_poke[self.pokemon_sauvage]
+        if self.sauvageHP > 0: #pour savoir si on a gagné ou si on continue
+            if rand.random() < 0.5:
+                point = self.pokemon_sauvage.calcul_pts_attaque(pokemon_choisi)[0]
+                
+            else:
+                point = self.pokemon_sauvage.calcul_pts_attaque(pokemon_choisi)[1]
+            self.pokemon_choisi.HP -=point
+        else:
+            #capture
+            pass
+        if self.choisiHP > 0: # pour savoir si on a perdu
+            choix_triple = Dlg_choix_action()
+            choix_triple.exec()
+            self.close()
+            window.ui.tete_perso.setFocus()
 
+class Dlg_choix_action(QDialog):
+    def __init__(self, parent=None, pokemon_choisi='défaut', pokemon_sauvage='défaut', choisiHP='défaut', sauvageHP='défaut'):
+        super().__init__(parent)
+        self.ui = Ui_ecran_triple
+        self.pokemon_choisi = pokemon_choisi
+        self.pokemon_sauvage = pokemon_sauvage
+        self.choisiHP= choisiHP
+        self.sauvageHP = sauvageHP
+        
+        self.bouton_fuir.clicked.connect(self.close)
+        self.bouton_attaque.clicked.connect(self.attaquer)
+        self.bouton_changer_pokemon.clicked.connect(self.changer)
+        
+        
+    def changer(self):
+        #on change mais on attaque pas
+        dlg_choix = ChoixPokemonDlg(pokemon_sauvage=self.pokemon_sauvage, sauvageHP=self.sauvageHP)
+        dlg_choix.exec()
+        self.close()
+        window.ui.tete_perso.setFocus()
+            
+    def attaquer(self):
+        """
+            renvoie à la boite de dialogue du choix d'attaque
+            entre neutre et spéciale
+
+            Returns
+            -------
+            None.
+
+            """
+        dlg_attaque = ChoixAttaqueDlg(pokemon_choisi=self.ui.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
+                                               choisiHP=self.choisiHP, sauvageHP=self.sauvageHP)
+        dlg_attaque.exec()
+        self.close()
+        window.ui.tete_perso.setFocus()
 
 """
         self.ui.bouton_fuir.clicked.connect(self.close)
