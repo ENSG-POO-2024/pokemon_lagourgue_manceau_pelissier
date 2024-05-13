@@ -93,7 +93,7 @@
     <string>COMBATTRE !</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="txt_poke_apparait">
    <property name="geometry">
     <rect>
      <x>20</x>
