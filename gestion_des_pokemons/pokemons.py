@@ -95,22 +95,20 @@ class Caracteristiques_Pokemon:
         txt += f'Speed : {self.speed}'
         return txt
     
-    def joueur_commence(self,autre):
-        if self.speed >= autre.speed:
-            return True
-        return False
-        
-    def calcul_pts_attaque(self,autre):
-        points_atk_neutre = round(self.attack - autre.defense * (autre.defense/autre.total))
-        ligne = Caracteristiques_Pokemon.liste_types.index(self.type1)
-        colonne1 = Caracteristiques_Pokemon.liste_types.index(autre.type1)
+    def pts_attaque_neutre(choisi,sauvage):
+        points_atk_neutre = round(choisi.attack - sauvage.defense * (sauvage.defense/sauvage.total))
+        return points_atk_neutre
+    
+    def pts_attaque_spe(choisi,sauvage):
+        ligne = Caracteristiques_Pokemon.liste_types.index(choisi.type1)
+        colonne1 = Caracteristiques_Pokemon.liste_types.index(sauvage.type1)
         coeff = Caracteristiques_Pokemon.tableau_affinites[ligne][colonne1]
-        if autre.type2 in Caracteristiques_Pokemon.liste_types:
-            colonne2 = Caracteristiques_Pokemon.liste_types.index(autre.type2)
+        if sauvage.type2 in Caracteristiques_Pokemon.liste_types:
+            colonne2 = Caracteristiques_Pokemon.liste_types.index(sauvage.type2)
             coeff *= Caracteristiques_Pokemon.tableau_affinites[ligne][colonne2]
-        points_atk_spe = round((self.sp_atk - autre.sp_def * (autre.sp_def/autre.total))* coeff)
-        return points_atk_neutre, points_atk_spe, coeff
-            
+        points_atk_spe = round((choisi.sp_atk - sauvage.sp_def * (sauvage.sp_def/sauvage.total))* coeff)
+        return points_atk_spe
+    
 
 class Pokemon(Caracteristiques_Pokemon):
     

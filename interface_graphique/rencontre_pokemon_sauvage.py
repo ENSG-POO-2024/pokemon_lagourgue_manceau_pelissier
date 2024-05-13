@@ -52,6 +52,6 @@ class Ui_rencontre_pokemon_sauvage(object):
     def retranslateUi(self, rencontre_pokemon_sauvage):
         _translate = QtCore.QCoreApplication.translate
         rencontre_pokemon_sauvage.setWindowTitle(_translate("rencontre_pokemon_sauvage", "Un pokémon apparait !"))
-        self.bouton_fuir.setText(_translate("rencontre_pokemon_sauvage", "fuir"))
+        self.bouton_fuir.setText(_translate("rencontre_pokemon_sauvage", "Fuir"))
         self.bouton_combattre.setText(_translate("rencontre_pokemon_sauvage", "COMBATTRE !"))
         self.txt_poke_apparait.setText(_translate("rencontre_pokemon_sauvage", "Un nom_pokémon sauvage apparaît !"))

@@ -75,7 +75,7 @@ class Ui_choix_attaque(object):
 
     def retranslateUi(self, Choix_attaque):
         _translate = QtCore.QCoreApplication.translate
-        Choix_attaque.setWindowTitle(_translate("Choix_attaque", "Dialog"))
+        Choix_attaque.setWindowTitle(_translate("Choix_attaque", "Choisis ton attaque !"))
         self.bouton_att_spe.setText(_translate("Choix_attaque", "Attaque spéciale"))
         self.bouton_att_neutre.setText(_translate("Choix_attaque", "Attaque neutre"))
         self.txt_degats_att_spe.setText(_translate("Choix_attaque", "Dégats infligés :              HP"))
