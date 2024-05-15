@@ -18,6 +18,7 @@ liste_poke_choisis = ['Caterpie','Clefairy','Diglett','Eevee','Ekans',"Farfetch'
                       'Jigglypuff','Machop','Meowth','Oddish','Paras','Pikachu','Ponyta','Psyduck',
                       'Rattata','Sandshrew','Venonat','Vulpix','Zubat']
 liste_tous_poke = liste_starter + liste_poke_choisis
+liste_pokedeck = liste_starter.copy()
 
 # Création du tableau contenant les 21 pokémons choisis et leurs coordonnées
 pokemons_coordinates['id'] = np.arange(998)
@@ -149,13 +150,3 @@ for k in range(len(tableau_pokemons)):
 for k in range(len(liste_starter)):
     ligne_coord = np.array([liste_starter[k],'pokédeck','pokédeck','pokédeck','pokédeck'])
     dico_poke[ligne_coord[0]] = Pokemon(ligne_coord)
-    
-   
-"""
-print(dico_objet['Vulpix'])
-print(dico_objet['Ivysaur'].calcul_pts_attaque(dico_objet['Bulbasaur']))
-dico_poke['Caterpie'].plot_dos()
-print(dico_poke['Caterpie'])
-"""
-
-

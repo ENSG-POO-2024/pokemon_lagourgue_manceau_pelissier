@@ -11,6 +11,7 @@ from interface_graphique.choix_pokemon import Ui_choix_pokemon
 from interface_graphique.choix_attaque import Ui_choix_attaque
 from interface_graphique.fond_combat import Ui_arene_de_combat
 from interface_graphique.ecran_triple import Ui_ecran_triple
+from interface_graphique.capture_pokemon import Ui_capture
 import random as rd
 import numpy as np
 import pandas as pd
@@ -353,7 +354,7 @@ class FondCombatDlg(QDialog):
             if self.sauvageHP <= 0:
                 self.ui.txt_descriptif.setText(f"{self.pokemon_sauvage} est KO ! Le combat est gagné !")
                 self.ui.barre_vie_pokemon_sauvage.setProperty("value",0)
-                self.ui.continuer.clicked.connect(self.open_dialog_pokemon_capture)
+                self.ui.continuer.clicked.connect(self.open_dialog_capture_pokemon)
                 
         # Cas où c'est au tour du pokémon sauvage de jouer
         if tour == 'sauvage':
@@ -389,9 +390,9 @@ class FondCombatDlg(QDialog):
         self.close()
         window.ui.tete_perso.setFocus()
         
-    def open_dialog_pokemon_capture(self):
-        classe_pokemon_capture = PokemonCaptureDlg(pokemon_sauvage=self.pokemon_sauvage)
-        classe_pokemon_capture.exec_()
+    def open_dialog_capture_pokemon(self):
+        classe_capture_pokemon = CapturePokemonDlg(pokemon_sauvage=self.pokemon_sauvage)
+        classe_capture_pokemon.exec_()
         self.close()
         window.ui.tete_perso.setFocus()
     
@@ -400,6 +401,7 @@ class FondCombatDlg(QDialog):
     
 
 class EcranTripleDlg(QDialog):
+    
     def __init__(self, parent=None, pokemon_choisi='défaut', pokemon_sauvage='défaut', choisiHP='défaut', sauvageHP='défaut',
                  ini_choi_HP='défaut', ini_sauv_HP='défaut', debut='défaut', tour='défaut'):
         super().__init__(parent)
@@ -434,12 +436,26 @@ class EcranTripleDlg(QDialog):
         self.close()
 
 
-class PokemonCaptureDlg(QDialog):
+class CapturePokemonDlg(QDialog):
+    
     def __init__(self, parent=None, pokemon_sauvage='défaut'):
         super().__init__(parent)
-        self.ui = Ui_ecran_triple()
+        self.ui = Ui_capture()
         self.ui.setupUi(self) #l'argument self est utilisé comme widget parent
-
+        self.pokemon_sauvage = pokemon_sauvage
+        self.ui.titre.setText(f"{pokemon_sauvage} est capturé !")
+        for k in pok.liste_tous_poke:
+            if pokemon_sauvage == k:
+                image_path = f"interface_graphique/images/images_pokemon/pokemons_finaux/face/{k}.png" # Chemin vers l'image
+        pixmap = QPixmap(image_path)
+        self.ui.pokemon_capture.setPixmap(pixmap)
+        self.ui.pokemon_capture.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
+        pok.liste_pokedeck.append(pokemon_sauvage)
+        self.ui.ok.clicked.connect(self.retour_carte)
+    
+    def retour_carte(self):
+        self.close()
+    
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -447,3 +463,14 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
+    
+    
+"""
+enlever carte
+voir points attaque
+ecran accueil
+separer classes
+remettre au propre
+documenter code
+voir rapport
+"""
