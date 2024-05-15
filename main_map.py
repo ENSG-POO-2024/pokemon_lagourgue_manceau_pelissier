@@ -11,7 +11,7 @@ from interface_graphique.choix_pokemon import Ui_choix_pokemon
 from interface_graphique.choix_attaque import Ui_choix_attaque
 from interface_graphique.fond_combat import Ui_arene_de_combat
 from interface_graphique.ecran_triple import Ui_ecran_triple
-import random as rand
+import random as rd
 import numpy as np
 import pandas as pd
 
@@ -208,7 +208,8 @@ class RencontreDlg(QDialog):
         self.close() #retour à la mainWindow, la carte
         
     def open_dialog_choix_pokemon(self):
-        classe_choix_pokemon = ChoixPokemonDlg(pokemon_sauvage=self.pokemon_sauvage, sauvageHP=self.sauvageHP)
+        classe_choix_pokemon = ChoixPokemonDlg(pokemon_sauvage=self.pokemon_sauvage, sauvageHP=self.sauvageHP,
+                                               ini_sauv_HP=self.sauvageHP, debut=True)
         classe_choix_pokemon.exec_()  # Affichez la boîte de dialogue de manière modale
         self.close()
         window.ui.tete_perso.setFocus()
@@ -216,36 +217,20 @@ class RencontreDlg(QDialog):
         
 class ChoixPokemonDlg(QDialog):
     
-    def __init__(self, parent=None, pokemon_sauvage='défaut', sauvageHP='défaut'):
+    def __init__(self, parent=None, pokemon_sauvage='défaut', sauvageHP='défaut', ini_sauv_HP='défaut', debut='défaut'):
         super().__init__(parent)
         self.ui = Ui_choix_pokemon()
         self.ui.setupUi(self) #l'argument self est utilisé comme widget parent
         self.pokemon_sauvage = pokemon_sauvage
         self.sauvageHP = sauvageHP
+        self.ini_sauv_HP = ini_sauv_HP
+        self.debut = debut
         self.ui.pokemon_choisi = 'Bulbasaur'
-        self.choisiHP = pok.dico_poke[self.ui.pokemon_choisi].HP
-        self.ui.ComboBox_choix_pokemon.currentIndexChanged.connect(self.load_image) # Connectez le signal de changement de sélection de la ComboBox
+        self.ui.choisiHP = pok.dico_poke[self.ui.pokemon_choisi].HP
+        self.ui.ComboBox_choix_pokemon.currentIndexChanged.connect(self.load_image_change_poke_choisi) # Connectez le signal de changement de sélection de la ComboBox
         self.ui.ok.clicked.connect(self.open_next_dialog)
-        
-    def open_next_dialog(self):
-        vitesse_poke_choisi = pok.dico_poke[self.ui.pokemon_choisi].speed 
-        vitesse_poke_sauvage = pok.dico_poke[self.pokemon_sauvage].speed
-        if vitesse_poke_choisi >= vitesse_poke_sauvage:
-            print('attaque')
-            classe_choix_attaque = ChoixAttaqueDlg(pokemon_choisi=self.ui.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
-                                                   choisiHP=self.choisiHP, sauvageHP=self.sauvageHP)
-            classe_choix_attaque.exec_()  # Affichez la boîte de dialogue de manière modale
-            self.close()
-            window.ui.tete_perso.setFocus()
-        else:
-            print('fond combat')
-            classe_fond_combat = FondCombatDlg(pokemon_choisi=self.ui.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
-                                               choisiHP=self.choisiHP, sauvageHP=self.sauvageHP)
-            classe_fond_combat.exec_()  # Affichez la boîte de dialogue de manière modale
-            self.close()
-            window.ui.tete_perso.setFocus()
-        
-    def load_image(self):
+    
+    def load_image_change_poke_choisi(self):
         selected_item = self.ui.ComboBox_choix_pokemon.currentText()
         for k in pok.liste_tous_poke:
             if selected_item == k:
@@ -254,12 +239,39 @@ class ChoixPokemonDlg(QDialog):
         self.ui.image_pokemon.setPixmap(pixmap)
         self.ui.image_pokemon.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
         self.ui.pokemon_choisi = self.ui.ComboBox_choix_pokemon.currentText()
-        
-        
-        
+        self.ui.choisiHP = pok.dico_poke[self.ui.pokemon_choisi].HP
+            
+    def open_next_dialog(self):
+        if self.debut:
+            vitesse_poke_choisi = pok.dico_poke[self.ui.pokemon_choisi].speed 
+            vitesse_poke_sauvage = pok.dico_poke[self.pokemon_sauvage].speed
+            if vitesse_poke_choisi >= vitesse_poke_sauvage:
+                classe_choix_attaque = ChoixAttaqueDlg(pokemon_choisi=self.ui.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
+                                                       choisiHP=self.ui.choisiHP, sauvageHP=self.sauvageHP, ini_choi_HP=self.ui.choisiHP,
+                                                       ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='choisi')
+                classe_choix_attaque.exec_()  # Affichez la boîte de dialogue de manière modale
+                self.close()
+                window.ui.tete_perso.setFocus()
+            else:
+                classe_fond_combat = FondCombatDlg(pokemon_choisi=self.ui.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
+                                                   choisiHP=self.ui.choisiHP, sauvageHP=self.sauvageHP, ini_choi_HP=self.ui.choisiHP,
+                                                   ini_sauv_HP=self.ini_sauv_HP,debut=False, tour='sauvage', nb_degats='reçus')
+                classe_fond_combat.exec_()  # Affichez la boîte de dialogue de manière modale
+                self.close()
+                window.ui.tete_perso.setFocus()
+        else:
+            classe_fond_combat = FondCombatDlg(pokemon_choisi=self.ui.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
+                                               choisiHP=self.ui.choisiHP, sauvageHP=self.sauvageHP, ini_choi_HP=self.ui.choisiHP,
+                                               ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='sauvage', nb_degats='reçus')
+            classe_fond_combat.exec_()  # Affichez la boîte de dialogue de manière modale
+            self.close()
+            window.ui.tete_perso.setFocus()
+            
+                
 class ChoixAttaqueDlg(QDialog):
     
-    def __init__(self, parent=None, pokemon_choisi='défaut', pokemon_sauvage='défaut', choisiHP='défaut', sauvageHP='défaut'):
+    def __init__(self, parent=None, pokemon_choisi='défaut', pokemon_sauvage='défaut', choisiHP='défaut', sauvageHP='défaut',
+                 ini_choi_HP='défaut', ini_sauv_HP='défaut', debut='défaut', tour='défaut'):
         super().__init__(parent)
         self.ui = Ui_choix_attaque()
         self.ui.setupUi(self) #l'argument self est utilisé comme widget parent
@@ -267,38 +279,38 @@ class ChoixAttaqueDlg(QDialog):
         self.pokemon_sauvage = pokemon_sauvage
         self.choisiHP = choisiHP
         self.sauvageHP = sauvageHP
+        self.ini_choi_HP = ini_choi_HP
+        self.ini_sauv_HP = ini_sauv_HP
         obj_pokemon_choisi = pok.dico_poke[self.pokemon_choisi]
         obj_pokemon_sauvage = pok.dico_poke[self.pokemon_sauvage]
-        attaque_neutre = pok.Caracteristiques_Pokemon.pts_attaque_neutre(obj_pokemon_choisi,obj_pokemon_sauvage)
-        attaque_spe = pok.Caracteristiques_Pokemon.pts_attaque_spe(obj_pokemon_choisi,obj_pokemon_sauvage)
-        self.ui.nbr_degat_att_neutre.setText(f"{attaque_neutre}")
-        self.ui.nbr_degat_att_spe.setText(f"{attaque_spe}")
+        self.attaque_neutre = pok.Caracteristiques_Pokemon.pts_attaque_neutre(obj_pokemon_choisi,obj_pokemon_sauvage)
+        self.attaque_spe = pok.Caracteristiques_Pokemon.pts_attaque_spe(obj_pokemon_choisi,obj_pokemon_sauvage)
+        self.ui.nbr_degat_att_neutre.setText(f"{self.attaque_neutre}")
+        self.ui.nbr_degat_att_spe.setText(f"{self.attaque_spe}")
         self.ui.bouton_att_neutre.clicked.connect(self.open_dialog_atk_neutre)
         self.ui.bouton_att_spe.clicked.connect(self.open_dialog_atk_spe)
         
     def open_dialog_atk_neutre(self):
-        nb_degats = int(self.ui.nbr_degat_att_neutre.text())
-        classe_fond_combat = FondCombatDlg(pokemon_choisi=self.ui.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
-                                               choisiHP=self.choisiHP, sauvageHP=self.sauvageHP, nb_degats = nb_degats)
+        classe_fond_combat = FondCombatDlg(pokemon_choisi=self.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
+                                           choisiHP=self.choisiHP, sauvageHP=self.sauvageHP, ini_choi_HP=self.ini_choi_HP,
+                                           ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='choisi', nb_degats=self.attaque_neutre)
         classe_fond_combat.exec_()  # Affichez la boîte de dialogue de manière modale
         self.close()
         window.ui.tete_perso.setFocus()
         
     def open_dialog_atk_spe(self):
-        nb_degats = int(self.ui.nbr_degat_att_spe.text())
-        classe_fond_combat = FondCombatDlg(pokemon_choisi=self.ui.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
-                                               choisiHP=self.choisiHP, sauvageHP=self.sauvageHP, nb_degats = nb_degats)
+        classe_fond_combat = FondCombatDlg(pokemon_choisi=self.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
+                                           choisiHP=self.choisiHP, sauvageHP=self.sauvageHP, ini_choi_HP=self.ini_choi_HP,
+                                           ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='choisi', nb_degats=self.attaque_spe)
         classe_fond_combat.exec_()  # Affichez la boîte de dialogue de manière modale
         self.close()
         window.ui.tete_perso.setFocus()
         
         
-    
-        
-
 class FondCombatDlg(QDialog):
     
-    def __init__(self, parent=None, pokemon_choisi='défaut', pokemon_sauvage='défaut', choisiHP='défaut', sauvageHP='défaut', nb_degats= 'defaut'):
+    def __init__(self, parent=None, pokemon_choisi='défaut', pokemon_sauvage='défaut', choisiHP='défaut', sauvageHP='défaut',
+                 ini_choi_HP='défaut', ini_sauv_HP='défaut', debut='défaut', tour='défaut', nb_degats= 'défaut'):
         super().__init__(parent)
         self.ui = Ui_arene_de_combat()
         self.ui.setupUi(self) #l'argument self est utilisé comme widget parent
@@ -306,75 +318,129 @@ class FondCombatDlg(QDialog):
         self.pokemon_sauvage = pokemon_sauvage
         self.choisiHP = choisiHP
         self.sauvageHP = sauvageHP
+        self.ini_choi_HP = ini_choi_HP
+        self.ini_sauv_HP = ini_sauv_HP
         self.nb_degats = nb_degats
         obj_pokemon_choisi = pok.dico_poke[self.pokemon_choisi]
         obj_pokemon_sauvage = pok.dico_poke[self.pokemon_sauvage]
-        if self.sauvageHP > 0: #pour savoir si on a gagné ou si on continue
-            if rand.random() < 0.5:
-                point = self.pokemon_sauvage.calcul_pts_attaque(pokemon_choisi)[0]
+        self.ui.nom_mon_pokemon.setText(f"{self.pokemon_choisi}")
+        self.ui.nom_pokemon_sauvage.setText(f"{self.pokemon_sauvage}")
+        for k in pok.liste_tous_poke:
+            if self.pokemon_choisi == k:
+                image_path_choisi = f"interface_graphique/images/images_pokemon/pokemons_finaux/dos/{k}.png" # Chemin vers l'image
+            if self.pokemon_sauvage == k:
+                image_path_sauvage = f"interface_graphique/images/images_pokemon/pokemons_finaux/face/{k}.png" # Chemin vers l'image
+        pixmap_choisi = QPixmap(image_path_choisi)
+        pixmap_sauvage = QPixmap(image_path_sauvage)
+        self.ui.img_mon_pokemon.setPixmap(pixmap_choisi)
+        self.ui.img_mon_pokemon.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
+        self.ui.img_pokemon_sauvage.setPixmap(pixmap_sauvage)
+        self.ui.img_pokemon_sauvage.setScaledContents(True)# Ajustez la taille de l'image au QLabel
+        self.ui.barre_vie_mon_pokemon.setMaximum(self.ini_choi_HP)
+        self.ui.barre_vie_pokemon_sauvage.setMaximum(self.ini_sauv_HP)
+        self.ui.barre_vie_mon_pokemon.setProperty("value",f"{self.choisiHP}")
+        self.ui.barre_vie_pokemon_sauvage.setProperty("value",f"{self.sauvageHP}")
+        
+        # Cas où c'est à notre tour de jouer
+        if tour == 'choisi':
+            self.sauvageHP -= self.nb_degats
+            # Cas où le pokémon sauvage a encore des PV : le combat continue
+            if self.sauvageHP > 0:
+                self.ui.txt_descriptif.setText(f"{self.pokemon_choisi} attaque ! {self.pokemon_sauvage} perd {self.nb_degats} HP !")
+                self.ui.barre_vie_pokemon_sauvage.setProperty("value",f"{self.sauvageHP}")
+                self.ui.continuer.clicked.connect(self.open_dialog_fond_combat)
+            # Cas où le pokémon sauvage n'a plus de PV : combat gagné
+            if self.sauvageHP <= 0:
+                self.ui.txt_descriptif.setText(f"{self.pokemon_sauvage} est KO ! Le combat est gagné !")
+                self.ui.barre_vie_pokemon_sauvage.setProperty("value",0)
+                self.ui.continuer.clicked.connect(self.open_dialog_pokemon_capture)
                 
+        # Cas où c'est au tour du pokémon sauvage de jouer
+        if tour == 'sauvage':
+            if rd.random() < 0.5:
+                self.nb_degats = pok.Caracteristiques_Pokemon.pts_attaque_neutre(obj_pokemon_sauvage,obj_pokemon_choisi)
             else:
-                point = self.pokemon_sauvage.calcul_pts_attaque(pokemon_choisi)[1]
-            self.pokemon_choisi.HP -=point
-        else:
-            #capture
-            pass
-        if self.choisiHP > 0: # pour savoir si on a perdu
-            choix_triple = Dlg_choix_action()
-            choix_triple.exec()
-            self.close()
-            window.ui.tete_perso.setFocus()
+                self.nb_degats = pok.Caracteristiques_Pokemon.pts_attaque_spe(obj_pokemon_sauvage,obj_pokemon_choisi)
+            self.choisiHP -= self.nb_degats
+            # Cas où notre pokemon a encore des PV : le combat continue
+            if self.choisiHP > 0:
+                self.ui.txt_descriptif.setText(f"{self.pokemon_sauvage} attaque ! {self.pokemon_choisi} perd {self.nb_degats} HP !")
+                self.ui.barre_vie_mon_pokemon.setProperty("value",f"{self.choisiHP}")
+                self.ui.continuer.clicked.connect(self.open_dialog_ecran_triple)
+            # Cas où notre pokémon n'a plus de PV : combat perdu
+            if self.choisiHP <= 0:
+                self.ui.txt_descriptif.setText(f"{self.pokemon_choisi} est KO ! Le combat est perdu !")
+                self.ui.barre_vie_mon_pokemon.setProperty("value",0)
+                self.ui.continuer.clicked.connect(self.retour_carte)
+                
+    def open_dialog_fond_combat(self):
+        classe_fond_combat = FondCombatDlg(pokemon_choisi=self.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
+                                           choisiHP=self.choisiHP, sauvageHP=self.sauvageHP, ini_choi_HP=self.ini_choi_HP,
+                                           ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='sauvage', nb_degats='reçus')
+        classe_fond_combat.exec_()  # Affichez la boîte de dialogue de manière modale
+        self.close()
+        window.ui.tete_perso.setFocus()
+    
+    def open_dialog_ecran_triple(self):
+        classe_ecran_triple = EcranTripleDlg(pokemon_choisi=self.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
+                                           choisiHP=self.choisiHP, sauvageHP=self.sauvageHP, ini_choi_HP=self.ini_choi_HP,
+                                           ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='choisi')
+        classe_ecran_triple.exec_()
+        self.close()
+        window.ui.tete_perso.setFocus()
+        
+    def open_dialog_pokemon_capture(self):
+        classe_pokemon_capture = PokemonCaptureDlg(pokemon_sauvage=self.pokemon_sauvage)
+        classe_pokemon_capture.exec_()
+        self.close()
+        window.ui.tete_perso.setFocus()
+    
+    def retour_carte(self):
+        self.close()
+    
 
-class Dlg_choix_action(QDialog):
-    def __init__(self, parent=None, pokemon_choisi='défaut', pokemon_sauvage='défaut', choisiHP='défaut', sauvageHP='défaut'):
+class EcranTripleDlg(QDialog):
+    def __init__(self, parent=None, pokemon_choisi='défaut', pokemon_sauvage='défaut', choisiHP='défaut', sauvageHP='défaut',
+                 ini_choi_HP='défaut', ini_sauv_HP='défaut', debut='défaut', tour='défaut'):
         super().__init__(parent)
-        self.ui = Ui_ecran_triple
+        self.ui = Ui_ecran_triple()
+        self.ui.setupUi(self) #l'argument self est utilisé comme widget parent
         self.pokemon_choisi = pokemon_choisi
         self.pokemon_sauvage = pokemon_sauvage
         self.choisiHP= choisiHP
         self.sauvageHP = sauvageHP
-        
-        self.bouton_fuir.clicked.connect(self.close)
-        self.bouton_attaque.clicked.connect(self.attaquer)
-        self.bouton_changer_pokemon.clicked.connect(self.changer)
-        
-        
-    def changer(self):
-        #on change mais on attaque pas
-        dlg_choix = ChoixPokemonDlg(pokemon_sauvage=self.pokemon_sauvage, sauvageHP=self.sauvageHP)
-        dlg_choix.exec()
+        self.ini_choi_HP = ini_choi_HP
+        self.ini_sauv_HP = ini_sauv_HP
+        self.ui.bouton_fuir.clicked.connect(self.fuir)
+        self.ui.bouton_attaque.clicked.connect(self.open_dialog_choix_attaque)
+        self.ui.bouton_changer_pokemon.clicked.connect(self.open_dialog_choix_pokemon)
+
+    def open_dialog_choix_attaque(self):
+        classe_choix_attaque = ChoixAttaqueDlg(pokemon_choisi=self.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
+                                               choisiHP=self.choisiHP, sauvageHP=self.sauvageHP, ini_choi_HP=self.ini_choi_HP,
+                                               ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='choisi')
+        classe_choix_attaque.exec_()  # Affichez la boîte de dialogue de manière modale
         self.close()
         window.ui.tete_perso.setFocus()
-            
-    def attaquer(self):
-        """
-            renvoie à la boite de dialogue du choix d'attaque
-            entre neutre et spéciale
-
-            Returns
-            -------
-            None.
-
-            """
-        dlg_attaque = ChoixAttaqueDlg(pokemon_choisi=self.ui.pokemon_choisi, pokemon_sauvage=self.pokemon_sauvage,
-                                               choisiHP=self.choisiHP, sauvageHP=self.sauvageHP)
-        dlg_attaque.exec()
+        
+    def open_dialog_choix_pokemon(self):
+        classe_choix_pokemon = ChoixPokemonDlg(pokemon_sauvage=self.pokemon_sauvage, sauvageHP=self.sauvageHP,
+                                               ini_sauv_HP=self.sauvageHP, debut=False)
+        classe_choix_pokemon.exec_()  # Affichez la boîte de dialogue de manière modale
         self.close()
         window.ui.tete_perso.setFocus()
-
-"""
-        self.ui.bouton_fuir.clicked.connect(self.close)
-        self.ui.bouton_attaque.clicked.connect(self.attaquer)
-        self.ui.bouton_changer_pokemon.clicked.connect(self.changer)
         
-        
-    def changer(self):
-        pass
-            
-    def attaquer(self):
-        pass
+    def fuir(self):
+        self.close()
 
-"""
+
+class PokemonCaptureDlg(QDialog):
+    def __init__(self, parent=None, pokemon_sauvage='défaut'):
+        super().__init__(parent)
+        self.ui = Ui_ecran_triple()
+        self.ui.setupUi(self) #l'argument self est utilisé comme widget parent
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     

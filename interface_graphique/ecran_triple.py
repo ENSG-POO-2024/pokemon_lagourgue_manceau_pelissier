@@ -18,7 +18,7 @@ class Ui_ecran_triple(object):
         self.fond_prairie = QtWidgets.QLabel(ecran_triple)
         self.fond_prairie.setGeometry(QtCore.QRect(-80, -110, 811, 581))
         self.fond_prairie.setText("")
-        self.fond_prairie.setPixmap(QtGui.QPixmap("images/prairie_et_ciel.png"))
+        self.fond_prairie.setPixmap(QtGui.QPixmap("interface_graphique/images/prairie_et_ciel.png"))
         self.fond_prairie.setObjectName("fond_prairie")
         self.bouton_attaque = QtWidgets.QPushButton(ecran_triple)
         self.bouton_attaque.setGeometry(QtCore.QRect(40, 50, 241, 41))
@@ -44,7 +44,7 @@ class Ui_ecran_triple(object):
         self.perso_2 = QtWidgets.QLabel(ecran_triple)
         self.perso_2.setGeometry(QtCore.QRect(450, -90, 201, 401))
         self.perso_2.setText("")
-        self.perso_2.setPixmap(QtGui.QPixmap("images/perso_attaque.png"))
+        self.perso_2.setPixmap(QtGui.QPixmap("interface_graphique/images/perso_attaque.png"))
         self.perso_2.setScaledContents(True)
         self.perso_2.setObjectName("perso_2")
 
@@ -53,7 +53,7 @@ class Ui_ecran_triple(object):
 
     def retranslateUi(self, ecran_triple):
         _translate = QtCore.QCoreApplication.translate
-        ecran_triple.setWindowTitle(_translate("ecran_triple", "Dialog"))
+        ecran_triple.setWindowTitle(_translate("ecran_triple", "Choisis ton action !"))
         self.bouton_attaque.setText(_translate("ecran_triple", "Attaque"))
         self.bouton_changer_pokemon.setText(_translate("ecran_triple", "Changer de pokemon"))
         self.bouton_fuir.setText(_translate("ecran_triple", "Fuir"))

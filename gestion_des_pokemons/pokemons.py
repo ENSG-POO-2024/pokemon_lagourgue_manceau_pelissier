@@ -152,11 +152,10 @@ for k in range(len(liste_starter)):
     
    
 """
-print(dico_objet['Ivysaur'])
+print(dico_objet['Vulpix'])
 print(dico_objet['Ivysaur'].calcul_pts_attaque(dico_objet['Bulbasaur']))
-"""
 dico_poke['Caterpie'].plot_dos()
 print(dico_poke['Caterpie'])
-
+"""
 
 
