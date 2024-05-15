@@ -85,7 +85,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Nom_pokemon est capturé !</string>
+    <string>Nom_pokemon est capturé ! </string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
