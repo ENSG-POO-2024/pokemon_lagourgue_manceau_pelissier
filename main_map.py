@@ -15,6 +15,7 @@ from interface_graphique.capture_pokemon import Ui_capture
 import random as rd
 import numpy as np
 import pandas as pd
+import time
 
 
 class MainWindow(QMainWindow):
@@ -33,6 +34,12 @@ class MainWindow(QMainWindow):
         #loadUi("map.ui", self)  # Chargez le fichier UI de la fenêtre principale
         # Connectez le bouton pour ouvrir la boîte de dialogue
         self.ui.bouton_pokedeck.clicked.connect(self.open_dialog_Pokedeck)
+        
+        debut = time.time()
+        if time.time()-debut < 1:
+            classe_ecran_accueil = EcranAccueilDlg()
+            classe_ecran_accueil.exec_()  # Affichez la boîte de dialogue de manière modale
+            self.ui.tete_perso.setFocus()
         
     def eventFilter(self, source, event):
         """
@@ -165,6 +172,18 @@ class MainWindow(QMainWindow):
         classe_pokedeck = PokedeckDlg()
         classe_pokedeck.exec_()  # Affichez la boîte de dialogue de manière modale
         self.ui.tete_perso.setFocus()
+        
+        
+class EcranAccueilDlg(QDialog):
+    
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.ui = Ui_ecran_accueil()
+        self.ui.setupUi(self)
+        self.ui.play.clicked.connect(self.open_carte)
+        
+    def open_carte(self):
+        self.close()
         
 
 class PokedeckDlg(QDialog):
@@ -451,6 +470,8 @@ class CapturePokemonDlg(QDialog):
         self.ui.pokemon_capture.setPixmap(pixmap)
         self.ui.pokemon_capture.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
         pok.liste_pokedeck.append(pokemon_sauvage)
+        ligne_coord = np.array([pokemon_sauvage,'pokédeck','pokédeck','pokédeck','pokédeck'])
+        pok.dico_poke[ligne_coord[0]] = pok.Pokemon(ligne_coord)
         self.ui.ok.clicked.connect(self.retour_carte)
     
     def retour_carte(self):
@@ -466,9 +487,7 @@ if __name__ == "__main__":
     
     
 """
-enlever carte
 voir points attaque
-ecran accueil
 separer classes
 remettre au propre
 documenter code

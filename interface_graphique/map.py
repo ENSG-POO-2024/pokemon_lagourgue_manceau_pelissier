@@ -56,5 +56,5 @@ class Ui_map(object):
 
     def retranslateUi(self, map_):
         _translate = QtCore.QCoreApplication.translate
-        map_.setWindowTitle(_translate("map_", "MainWindow"))
+        map_.setWindowTitle(_translate("map_", "Carte"))
         self.bouton_pokedeck.setText(_translate("map_", "Pokedeck"))
