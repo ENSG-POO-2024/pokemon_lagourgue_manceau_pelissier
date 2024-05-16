@@ -14,7 +14,6 @@ from interface_graphique.ecran_triple import Ui_ecran_triple
 from interface_graphique.capture_pokemon import Ui_capture
 import random as rd
 import numpy as np
-import pandas as pd
 import time
 
 
@@ -487,7 +486,6 @@ if __name__ == "__main__":
     
     
 """
-voir points attaque
 separer classes
 remettre au propre
 documenter code

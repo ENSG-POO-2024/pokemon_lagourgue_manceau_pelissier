@@ -97,7 +97,7 @@ class Caracteristiques_Pokemon:
         return txt
     
     def pts_attaque_neutre(choisi,sauvage):
-        points_atk_neutre = round(choisi.attack - sauvage.defense * (sauvage.defense/sauvage.total))
+        points_atk_neutre = round((choisi.attack - sauvage.defense * (sauvage.defense/sauvage.total))/2)
         return points_atk_neutre
     
     def pts_attaque_spe(choisi,sauvage):
@@ -107,7 +107,7 @@ class Caracteristiques_Pokemon:
         if sauvage.type2 in Caracteristiques_Pokemon.liste_types:
             colonne2 = Caracteristiques_Pokemon.liste_types.index(sauvage.type2)
             coeff *= Caracteristiques_Pokemon.tableau_affinites[ligne][colonne2]
-        points_atk_spe = round((choisi.sp_atk - sauvage.sp_def * (sauvage.sp_def/sauvage.total))* coeff)
+        points_atk_spe = round(((choisi.sp_atk - sauvage.sp_def * (sauvage.sp_def/sauvage.total))* coeff)/2)
         return points_atk_spe
     
 
