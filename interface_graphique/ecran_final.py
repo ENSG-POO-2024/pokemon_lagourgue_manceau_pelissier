@@ -11,47 +11,47 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(279, 531)
-        self.ciel_bleu = QtWidgets.QLabel(Dialog)
+class Ui_ecran_final(object):
+    def setupUi(self, ecran_final):
+        ecran_final.setObjectName("ecran_final")
+        ecran_final.resize(279, 531)
+        self.ciel_bleu = QtWidgets.QLabel(ecran_final)
         self.ciel_bleu.setGeometry(QtCore.QRect(-40, 0, 791, 821))
         self.ciel_bleu.setText("")
-        self.ciel_bleu.setPixmap(QtGui.QPixmap("images/prairie_et_ciel.png"))
+        self.ciel_bleu.setPixmap(QtGui.QPixmap("interface_graphique/images/prairie_et_ciel.png"))
         self.ciel_bleu.setScaledContents(True)
         self.ciel_bleu.setObjectName("ciel_bleu")
-        self.perso_final = QtWidgets.QLabel(Dialog)
+        self.perso_final = QtWidgets.QLabel(ecran_final)
         self.perso_final.setGeometry(QtCore.QRect(0, 70, 281, 461))
         self.perso_final.setText("")
-        self.perso_final.setPixmap(QtGui.QPixmap("images/image_finale.png"))
+        self.perso_final.setPixmap(QtGui.QPixmap("interface_graphique/images/image_finale.png"))
         self.perso_final.setScaledContents(True)
         self.perso_final.setObjectName("perso_final")
-        self.txt_bravo = QtWidgets.QLabel(Dialog)
+        self.txt_bravo = QtWidgets.QLabel(ecran_final)
         self.txt_bravo.setGeometry(QtCore.QRect(80, 10, 131, 41))
         font = QtGui.QFont()
         font.setPointSize(30)
         self.txt_bravo.setFont(font)
         self.txt_bravo.setObjectName("txt_bravo")
-        self.txt = QtWidgets.QLabel(Dialog)
+        self.txt = QtWidgets.QLabel(ecran_final)
         self.txt.setGeometry(QtCore.QRect(20, 60, 241, 41))
         font = QtGui.QFont()
         font.setPointSize(17)
         self.txt.setFont(font)
         self.txt.setObjectName("txt")
-        self.txt_remerciement = QtWidgets.QLabel(Dialog)
+        self.txt_remerciement = QtWidgets.QLabel(ecran_final)
         self.txt_remerciement.setGeometry(QtCore.QRect(60, 500, 141, 20))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.txt_remerciement.setFont(font)
         self.txt_remerciement.setObjectName("txt_remerciement")
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(ecran_final)
+        QtCore.QMetaObject.connectSlotsByName(ecran_final)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, ecran_final):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.txt_bravo.setText(_translate("Dialog", "Bravo !"))
-        self.txt.setText(_translate("Dialog", "Tu les as tous capturés"))
-        self.txt_remerciement.setText(_translate("Dialog", "Merci d\'avoir joué ;)"))
+        ecran_final.setWindowTitle(_translate("ecran_final", "Félicitations !"))
+        self.txt_bravo.setText(_translate("ecran_final", "Bravo !"))
+        self.txt.setText(_translate("ecran_final", "Tu les as tous capturés"))
+        self.txt_remerciement.setText(_translate("ecran_final", "Merci d\'avoir joué ;)"))
