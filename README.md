@@ -59,7 +59,7 @@ Version PyQT utilisée : 5.15.7
 
 
 #### Dans le répertoire "gestion_des_pokemons", on retrouve :
-* Un fichier python contenant la classe Pokemon et Caracteristiques_Pokemons
+* Un fichier python contenant la classe Pokemon et Caracteristiques_Pokemons qui permet de construire les pokémons présents sur la carte.
 
 #### Dans le répertoire "interface_graphique", on retrouve :
 * ecran_accueil au format ui et py : il contient la boîte de dialogue de l'écran d'accueil où le joueur clique sur "play".
@@ -76,8 +76,8 @@ Version PyQT utilisée : 5.15.7
 
 * ecran_triple au format ui et py : boîte de dialogue où le joueur décide d'attaquer, de changer de pokémon ou de fuir.
 
-* capture_pokemon au  format ui et py : écran qui annonce au joueur la capture du pokémon sauvage
+* capture_pokemon au  format ui et py : écran qui annonce au joueur la capture du pokémon sauvage.
 
 ### Le main :
-* main_map : contient la classe MainWindow
+* main_map : contient la classe MainWindow. Permet de lancer le jeu.
 
