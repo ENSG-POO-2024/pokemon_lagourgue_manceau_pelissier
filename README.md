@@ -63,7 +63,7 @@
 * map au format ui et py : c'est la mainwindow. Elle représente la carte.
 * pokedeck au format ui et py :
 * rencontre_pokemon_sauvage au au format ui et py
-* choix_attaqueau au format ui et py
+* choix_attaque au au format ui et py
 * fond_combatau au format ui et py
 * ecran_tripleau au format ui et py
 * capture_pokemon au au format ui et py
