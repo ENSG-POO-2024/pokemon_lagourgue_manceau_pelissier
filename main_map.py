@@ -44,7 +44,6 @@ class MapMainWindow(QMainWindow):
             # Remettre le focus sur le personnage après avoir fermé la fenêtre de l'écran d'accueil
             self.ui.tete_perso.setFocus()
         
-        
     def eventFilter(self, source, event):
         """
         Détecte quand on appuie sur les touches du clavier et lance la fonction de
@@ -255,8 +254,6 @@ class RencontreDlg(QDialog):
                                                ini_sauv_HP=self.sauvageHP, debut=True)
         classe_choix_pokemon.exec_()
         self.close()
-        # Remettre le focus sur le personnage après avoir fermé la fenêtre
-        window.ui.tete_perso.setFocus()
    
         
 class ChoixPokemonDlg(QDialog):
@@ -321,8 +318,6 @@ class ChoixPokemonDlg(QDialog):
                                                        ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='choisi')
                 classe_choix_attaque.exec_()
                 self.close()
-                # Remettre le focus sur le personnage après avoir fermé la fenêtre
-                window.ui.tete_perso.setFocus()
                 
             # Cas où le pokémon sauvage est plus rapide: on ouvre la boîte de dialogue Fond Combat
             else:
@@ -331,8 +326,6 @@ class ChoixPokemonDlg(QDialog):
                                                    ini_sauv_HP=self.ini_sauv_HP,debut=False, tour='sauvage', nb_degats='reçus')
                 classe_fond_combat.exec_()
                 self.close()
-                # Remettre le focus sur le personnage après avoir fermé la fenêtre
-                window.ui.tete_perso.setFocus()
         
         # Cas où le combat est déjà en cours: on ouvre la boîte de dialogue Fond Combat
         else:
@@ -341,8 +334,6 @@ class ChoixPokemonDlg(QDialog):
                                                ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='sauvage', nb_degats='reçus')
             classe_fond_combat.exec_()
             self.close()
-            # Remettre le focus sur le personnage après avoir fermé la fenêtre
-            window.ui.tete_perso.setFocus()
             
                 
 class ChoixAttaqueDlg(QDialog):
@@ -390,8 +381,6 @@ class ChoixAttaqueDlg(QDialog):
                                            ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='choisi', nb_degats=self.attaque_neutre)
         classe_fond_combat.exec_()
         self.close()
-        # Remettre le focus sur le personnage après avoir fermé la fenêtre
-        window.ui.tete_perso.setFocus()
         
     def open_dialog_atk_spe(self):
         """
@@ -402,8 +391,6 @@ class ChoixAttaqueDlg(QDialog):
                                            ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='choisi', nb_degats=self.attaque_spe)
         classe_fond_combat.exec_()
         self.close()
-        # Remettre le focus sur le personnage après avoir fermé la fenêtre
-        window.ui.tete_perso.setFocus()
         
         
 class FondCombatDlg(QDialog):
@@ -517,8 +504,6 @@ class FondCombatDlg(QDialog):
                                            ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='sauvage', nb_degats='reçus')
         classe_fond_combat.exec_()
         self.close()
-        # Remettre le focus sur le personnage après avoir fermé la fenêtre
-        window.ui.tete_perso.setFocus()
     
     def open_dialog_ecran_triple(self):
         """
@@ -530,8 +515,6 @@ class FondCombatDlg(QDialog):
                                            ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='choisi')
         classe_ecran_triple.exec_()
         self.close()
-        # Remettre le focus sur le personnage après avoir fermé la fenêtre
-        window.ui.tete_perso.setFocus()
         
     def open_dialog_capture_pokemon(self):
         """
@@ -541,8 +524,6 @@ class FondCombatDlg(QDialog):
         classe_capture_pokemon = CapturePokemonDlg(pokemon_sauvage=self.pokemon_sauvage)
         classe_capture_pokemon.exec_()
         self.close()
-        # Remettre le focus sur le personnage après avoir fermé la fenêtre
-        window.ui.tete_perso.setFocus()
     
     def retour_carte(self):
         """
@@ -587,8 +568,6 @@ class EcranTripleDlg(QDialog):
                                                ini_sauv_HP=self.ini_sauv_HP, debut=False, tour='choisi')
         classe_choix_attaque.exec_()
         self.close()
-        # Remettre le focus sur le personnage après avoir fermé la fenêtre
-        window.ui.tete_perso.setFocus()
         
     def open_dialog_choix_pokemon(self):
         """
@@ -598,8 +577,6 @@ class EcranTripleDlg(QDialog):
                                                ini_sauv_HP=self.ini_sauv_HP, debut=False)
         classe_choix_pokemon.exec_()
         self.close()
-        # Remettre le focus sur le personnage après avoir fermé la fenêtre
-        window.ui.tete_perso.setFocus()
         
     def fuir(self):
         """
@@ -650,8 +627,6 @@ class CapturePokemonDlg(QDialog):
         if len(pok.liste_pokedeck) == 24:
             classe_ecran_final = EcranFinalDlg()
             classe_ecran_final.exec_()
-            # Remettre le focus sur le personnage après avoir fermé la fenêtre de l'écran d'accueil
-            window.ui.tete_perso.setFocus()
         self.close()
         
         
@@ -672,9 +647,3 @@ if __name__ == "__main__":
     window = MapMainWindow()
     window.show()
     sys.exit(app.exec_())
-    
-    
-"""
-separer classes
-voir rapport
-"""
