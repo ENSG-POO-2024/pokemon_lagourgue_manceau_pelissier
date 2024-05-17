@@ -20,7 +20,7 @@ liste_poke_choisis = ['Caterpie','Clefairy','Diglett','Eevee','Ekans',"Farfetch'
 liste_tous_poke = liste_starter + liste_poke_choisis
 liste_pokedeck = liste_starter.copy()
 
-# Création du tableau contenant les 21 pokémons choisis et leurs coordonnées
+# Création du tableau contenant les 21 pokémons choisis et leurs coordonnées arrondies
 pokemons_coordinates['id'] = np.arange(998)
 liste_poke_coordinates = list(pokemons_coordinates['pokemon'])
 liste_index = []
@@ -44,7 +44,7 @@ pokemons_coordinates_final['X'] = liste_x
 pokemons_coordinates_final['Y'] = liste_y
 tableau_pokemons = pokemons_coordinates_final.to_numpy()
 
-# Affichage de la visualisation de la carte
+# Affichage de la visualisation de la répartition des pokémons sauvages
 plt.scatter(pokemons_coordinates_final.X,pokemons_coordinates_final.Y)
 plt.show()
 
@@ -150,3 +150,27 @@ for k in range(len(tableau_pokemons)):
 for k in range(len(liste_starter)):
     ligne_coord = np.array([liste_starter[k],'pokédeck','pokédeck','pokédeck','pokédeck'])
     dico_poke[ligne_coord[0]] = Pokemon(ligne_coord)
+    
+
+# Tests
+print("\n\n\nTests:")
+
+# Affichage d'un pokémon (Eevee)
+print("\nAffichage d'un pokémon (Eevee)")
+print(dico_poke['Eevee'])
+
+# Calculs des points d'attaque
+print("\nCalculs des points d'attaque:")
+# Attaque neutre
+print("\nAttaque neutre (de Bulbasaur sur Vulpix)")
+print(Caracteristiques_Pokemon.pts_attaque_neutre(dico_poke['Bulbasaur'],dico_poke['Vulpix']))
+# Attaque spéciale
+print("\nAttaque spéciale (de Bulbasaur sur Vulpix)")
+print(Caracteristiques_Pokemon.pts_attaque_spe(dico_poke['Bulbasaur'],dico_poke['Vulpix']))
+
+# Affichage de l'image d'un pokémon (de face et de dos)
+print("\nAffichage de l'image d'un pokémon (de face et de dos)")
+Pokemon.plot_face(dico_poke['Caterpie'])
+plt.show()
+Pokemon.plot_dos(dico_poke['Caterpie'])
+plt.show()
