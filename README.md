@@ -1,18 +1,42 @@
 # Pokémon: projet informatique
 
-* Marie-Dominique Van Damme: marie-dominique.van-damme@ensg.eu
-* Melvin Hersent: melvin.hersent@map.cnrs.fr
+* Lagourgue Eléonore
+* Manceau Loéva
+* Pelissier Maïlys
 
-## Matériel de départ
+## Manuel d'utilisation du projet pokémon :
 
-### Dans le répertoire "document", vous avez:
+### Lancement du jeu :
 
-* la présentation du projet informatique (ProjetInfo_Ing1_2024.pdf)
-* des exemples de règles de combat entre les pokémons (MondePokemon.pdf)
-* le support de cours des interfaces graphiques
+* Ouvrir dans spyder le fichier main_map.py
+* Lancer ce fichier 
+* Le joueur commence le jeu avec trois pokémons dans son deck: Bulbasaur, Charmander et Squirtle
 
-### Dans le répertoire "data", vous avez:
+### Pokédeck :
+* Le joueur peut accéder aux pokémons qu'il possède en cliquant sur le bouton Pokedeck. Il accèdera à un menu déroulant où il pourra voir tous les pokémons qu'il a et le nombre de pokémons possédés sur le nombre total de pokémons sur la carte.
 
+### Déplacement :
+* Pour se déplacer sur la carte, utiliser les flèches du clavier
+
+### Rencontre du pokémon sauvage:
+* Un écran s'affiche pour signaler la rencontre avec un pokémon sauvage
+* Le joueur choisit de s'enfuir ou de combattre
+
+### Combat :
+* Dans le cas d'un combat, le joueur doit sélectionner un pokémon
+* S'il est moins rapide, c'est le pokémon sauvage qui attaque. Sinon le joueur a le choix entre une attaque neutre et une attaque spéciale
+* A chaque tour le joueur peut attaquer, changer de pokémon ou fuir.
+
+
+## Modification du code :
+
+### Organisation des fichiers  : 
+
+#### Dans le répertoire "documents", on retrouve :
+* La présentation du projet au format pdf
+* L'explication des coefficents d'attaques au format pdf
+
+#### Dans le répertoire "data", on retrouve :  
 * Un fichier csv contenant les 151 pokemons de la première génération, ainsi que leurs attributs :
   1. `#` : indique le numéro du pokemon (peut être utilisé comme id)
   2. `name` : le nom (ici en anglais) du pokemon
@@ -30,9 +54,21 @@
 
 * Un fichier csv contenant une liste de pokemons avec des coordonnées géographiques.
 
-## Comment créer votre dépôt github ?
+
+#### Dans le répertoire "gestion_des_pokemons", on retrouve :
+* Un fichier python contenant la classe Pokemon et Caracteristiques_Pokemons
+
+#### Dans le répertoire "interface_graphique", on retrouve :
+* ecran_accueil au format ui et py : il contient
+* map au format ui et py : c'est la mainwindow
+* pokedeckau au format ui et py
+* rencontre_pokemon_sauvageau au format ui et py
+* choix_attaqueau au format ui et py
+* fond_combatau au format ui et py
+* ecran_tripleau au format ui et py
+* capture_pokemonau au format ui et py
+
+
 
 1. Se créer un identifiant github
-2. Demander à un enseignant de vous ajouter dans l'organisation **ENSG-POO-2024**
-3. *Forker* (copier) le projet **projetPokemon** et choisissez un nom très personnalisé !
-4. Pour voir comment établir une connexion ssh entre votre ordinateur et github, voir documents/sshConnexion.md
+
