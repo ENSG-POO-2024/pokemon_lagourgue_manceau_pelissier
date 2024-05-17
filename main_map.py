@@ -44,14 +44,6 @@ class MapMainWindow(QMainWindow):
             # Remettre le focus sur le personnage après avoir fermé la fenêtre de l'écran d'accueil
             self.ui.tete_perso.setFocus()
         
-        # Ouvrir la boîte de dialogue de l'écran de fin de jeu quand les 24 pokémons sont capturés
-        fin = True
-        if len(pok.liste_pokedeck) == 24 and fin:
-            classe_ecran_final = EcranFinalDlg()
-            classe_ecran_final.exec_()
-            fin = False
-            # Remettre le focus sur le personnage après avoir fermé la fenêtre de l'écran d'accueil
-            self.ui.tete_perso.setFocus()
         
     def eventFilter(self, source, event):
         """
@@ -79,7 +71,7 @@ class MapMainWindow(QMainWindow):
         Affiche le déplacement du personnage (représenté par un carré) dans les 
         limites de l'image et change ses coordonnées
         """
-        # Définit la nouvelle position du carré
+        # Définir la nouvelle position du carré
         square_pos = self.ui.tete_perso.pos()
         new_pos = square_pos + QPoint(dx, dy)
     
@@ -623,31 +615,53 @@ class CapturePokemonDlg(QDialog):
         
         # Utilisation de la classe générée par Qt Designer
         self.ui = Ui_capture()
-        self.ui.setupUi(self) #l'argument self est utilisé comme widget parent
+        self.ui.setupUi(self)
+        
+        # Récupérer le nom du pokémon sauvage capturé 
         self.pokemon_sauvage = pokemon_sauvage
+        
+        # Afficher le texte "{pokemon_sauvage} est capturé !" avec le nom du pokémon
         self.ui.titre.setText(f"{pokemon_sauvage} est capturé !")
+        
+        # Afficher l'image du pokémon correspondant
         for k in pok.liste_tous_poke:
             if pokemon_sauvage == k:
-                image_path = f"interface_graphique/images/images_pokemon/pokemons_finaux/face/{k}.png" # Chemin vers l'image
+                image_path = f"interface_graphique/images/images_pokemon/pokemons_finaux/face/{k}.png"
         pixmap = QPixmap(image_path)
         self.ui.pokemon_capture.setPixmap(pixmap)
-        self.ui.pokemon_capture.setScaledContents(True)  # Ajustez la taille de l'image au QLabel
+        self.ui.pokemon_capture.setScaledContents(True)
+        
+        # Ajouter le pokémon à la liste des pokémons dans le pokédeck
         pok.liste_pokedeck.append(pokemon_sauvage)
+        
+        # Changer les coordonnées du pokémon en ['pokédeck','pokédeck'] pour qu'il 
+        # n'apparaisse plus sur la carte
         ligne_coord = np.array([pokemon_sauvage,'pokédeck','pokédeck','pokédeck','pokédeck'])
         pok.dico_poke[ligne_coord[0]] = pok.Pokemon(ligne_coord)
-        self.ui.ok.clicked.connect(self.retour_carte)
+        
+        # Bouton OK qui renvoie sur la carte ou affiche l'écran de fin quand les 24 pokémons sont capturés
+        self.ui.ok.clicked.connect(self.retour_carte_ou_ecran_fin)
     
-    def retour_carte(self):
+    def retour_carte_ou_ecran_fin(self):
+        """
+        Ouvre la boîte de dialogue de l'écran de fin si les 24 pokémons sont capturés
+        Renvoie à la carte sinon
+        """
+        if len(pok.liste_pokedeck) == 24:
+            classe_ecran_final = EcranFinalDlg()
+            classe_ecran_final.exec_()
+            # Remettre le focus sur le personnage après avoir fermé la fenêtre de l'écran d'accueil
+            window.ui.tete_perso.setFocus()
         self.close()
         
         
 class EcranFinalDlg(QDialog):
     
-    def __init__(self, parent=None, pokemon_sauvage='défaut'):
+    def __init__(self, parent=None):
         super().__init__(parent)
         
         # Utilisation de la classe générée par Qt Designer
-        self.ui = Ui_capture()
+        self.ui = Ui_ecran_final()
         self.ui.setupUi(self)
     
     
@@ -662,6 +676,5 @@ if __name__ == "__main__":
     
 """
 separer classes
-documenter code
 voir rapport
 """
