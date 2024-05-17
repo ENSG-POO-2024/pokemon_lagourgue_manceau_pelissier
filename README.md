@@ -4,8 +4,8 @@
 * Manceau Loéva
 * Pelissier Maïlys
 
-Version numpy utilisée : 1.24.3
-Version PyQT utilisée : 5.15.7
+* Version numpy utilisée : 1.24.3
+* Version PyQT utilisée : 5.15.7
 
 ## Manuel d'utilisation du projet pokémon :
 
@@ -33,6 +33,7 @@ Version PyQT utilisée : 5.15.7
 * A son tour le joueur peut attaquer, changer de pokémon ou fuir.
 * En cas d'attaque, le pokémon a le choix entre une attaque normale et une attaque spéciale (de son 1er type).
 * Le pokémon sauvage choisit une de ces attaques aléatoirement.
+* En cas de victoire, le pokémon sauvage est capturé et fait désormais partie du Pokédeck.
 
 
 ## Modification du code :
@@ -59,31 +60,36 @@ Version PyQT utilisée : 5.15.7
   12. `Generation` : la génération du pokemon (ici la première)
   13. `Legendary` : rareté du pokemon, les légendaires sont normalement uniques
 
-* Un fichier csv contenant une liste de pokemons avec des coordonnées géographiques.
+* Un fichier csv contenant une liste de pokemons avec des coordonnées géographiques
 
 
 #### Dans le répertoire "gestion_des_pokemons", on retrouve :
-* Un fichier python contenant la classe Pokemon et Caracteristiques_Pokemons qui permet de construire les pokémons présents sur la carte.
+* Un fichier python contenant la classe Pokemon et Caracteristiques_Pokemon qui permet de créer les attributs des pokémons présents sur la carte
 
 #### Dans le répertoire "interface_graphique", on retrouve :
-* ecran_accueil au format ui et py : il contient la boîte de dialogue de l'écran d'accueil où le joueur clique sur "play".
 
-* map au format ui et py : c'est la mainwindow. Elle représente la carte.
+* Un dossier images contenant les images utilisées dans le jeu
+
+* map au format ui et py : c'est la mainwindow. Elle représente la carte où le joueur se déplace.
+
+* ecran_accueil au format ui et py : boîte de dialogue de l'écran d'accueil où le joueur clique sur "play".
 
 * pokedeck au format ui et py :  boîte de dialogue du pokedeck où le joueur peut voir les pokémons capturés.
 
-* rencontre_pokemon_sauvage  au format ui et py : écran qui s'affiche lorsque le joueur croise un pokémon sauvage.
+* rencontre_pokemon_sauvage au format ui et py : écran qui s'affiche lorsque le joueur croise un pokémon sauvage.
 
-* choix_pokemon au format ui et py : écran où le joueur peut choisir son pokémon
+* choix_pokemon au format ui et py : écran où le joueur peut choisir son pokémon lors d'un combat.
 
-* choix_attaque au format ui et py : écran où le joueur décide d'une attaque neutre ou d'une attaque spéciale
+* choix_attaque au format ui et py : écran où le joueur choisit entre une attaque neutre et une attaque spéciale.
 
-* fond_combat  au format ui et py : représente l'arène où s'affronte les deux pokémons.
+* fond_combat  au format ui et py : écran représentant l'arène où s'affrontent les deux pokémons.
 
-* ecran_triple au format ui et py : boîte de dialogue où le joueur décide d'attaquer, de changer de pokémon ou de fuir.
+* ecran_triple au format ui et py : écran où le joueur choisit entre attaquer, changer de pokémon ou fuir.
 
-* capture_pokemon au  format ui et py : écran qui annonce au joueur la capture du pokémon sauvage.
+* capture_pokemon au format ui et py : écran qui annonce au joueur la capture du pokémon sauvage.
+
+* ecran_final au format ui et py : écran qui annonce la fin du jeu, lorsque les 24 pokémons sont capturés.
 
 ### Le main :
-* main_map : contient la classe MainWindow. Permet de lancer le jeu.
+* main_map : contient la classe MapMainWindow. Permet de lancer le jeu.
 
