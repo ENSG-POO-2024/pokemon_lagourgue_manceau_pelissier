@@ -16,11 +16,11 @@
 * Le joueur peut accéder aux pokémons qu'il possède en cliquant sur le bouton Pokedeck. Il accèdera à un menu déroulant où il pourra voir tous les pokémons qu'il a et le nombre de pokémons possédés sur le nombre total de pokémons sur la carte.
 
 ### Déplacement :
-* Pour se déplacer sur la carte, utiliser les flèches du clavier
+* Pour se déplacer sur la carte, utiliser les flèches du clavier.
 
 ### Rencontre du pokémon sauvage:
-* Un écran s'affiche pour signaler la rencontre avec un pokémon sauvage
-* Le joueur choisit de s'enfuir ou de combattre
+* Un écran s'affiche pour signaler la rencontre avec un pokémon sauvage.
+* Le joueur choisit de s'enfuir ou de combattre.
 
 ### Combat :
 * Dans le cas d'un combat, le joueur doit sélectionner un pokémon
@@ -59,16 +59,15 @@
 * Un fichier python contenant la classe Pokemon et Caracteristiques_Pokemons
 
 #### Dans le répertoire "interface_graphique", on retrouve :
-* ecran_accueil au format ui et py : il contient
-* map au format ui et py : c'est la mainwindow
-* pokedeckau au format ui et py
-* rencontre_pokemon_sauvageau au format ui et py
+* ecran_accueil au format ui et py : il contient la boîte de dialogue de l'écran d'accueil où le joueur clique sur "play"
+* map au format ui et py : c'est la mainwindow. Elle représente la carte.
+* pokedeck au format ui et py :
+* rencontre_pokemon_sauvage au au format ui et py
 * choix_attaqueau au format ui et py
 * fond_combatau au format ui et py
 * ecran_tripleau au format ui et py
-* capture_pokemonau au format ui et py
+* capture_pokemon au au format ui et py
 
-
-
-1. Se créer un identifiant github
+### Le main :
+* main_map 
 
