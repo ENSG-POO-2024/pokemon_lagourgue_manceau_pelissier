@@ -17,27 +17,27 @@ import numpy as np
 import time
 
 
-class MainWindow(QMainWindow):
+class MapMainWindow(QMainWindow):
     
     def __init__(self):
         super().__init__()
-
-        # Utilisez la classe générée par Qt Designer
+        # Utilisation de la classe générée par Qt Designer
         self.ui = Ui_map()
         self.ui.setupUi(self)
 
-        # Connectez les signaux et les slots pour gérer les événements de clavier
+        # Mettre le focus sur le personnage pour recevoir les évènements de clavier
         self.ui.tete_perso.setFocus()  # Assurez-vous que le QLabel du perso a le focus pour recevoir les événements de clavier
-        self.ui.tete_perso.installEventFilter(self)
         
-        #loadUi("map.ui", self)  # Chargez le fichier UI de la fenêtre principale
-        # Connectez le bouton pour ouvrir la boîte de dialogue
+        # Détecter les évènements 
+        self.ui.tete_perso.installEventFilter(self)
+
+        # Bouton pokédeck qui ouvre la boîte de dialogue Pokédeck
         self.ui.bouton_pokedeck.clicked.connect(self.open_dialog_Pokedeck)
         
         debut = time.time()
         if time.time()-debut < 1:
             classe_ecran_accueil = EcranAccueilDlg()
-            classe_ecran_accueil.exec_()  # Affichez la boîte de dialogue de manière modale
+            classe_ecran_accueil.exec_()
             self.ui.tete_perso.setFocus()
         
     def eventFilter(self, source, event):
@@ -125,38 +125,42 @@ class MainWindow(QMainWindow):
                                  
     def calcul_distance_poke(self,coord,nom_poke):
         """
-        Calcule la distance entre chaque pokemon présents et le personnage
+        Calcule la distance entre un pokemon et le personnage
 
         Parameters
         ----------
-        coord : TYPE liste
-            DESCRIPTION. contient l'ordonnée et l'abscisse du personnage
-        nom_poke : TYPE
-            DESCRIPTION.
+        coord : coordonnées du personnage
+                type : list
+        nom_poke : nom du pokémon
+                type : str
 
         Returns
         -------
-        TYPE
-            DESCRIPTION.
+        dist : distance entre un pokemon et le personnage
+                type : float
+        1000 : retourne 1000 si le pokémon est dans le pokédeck
+                (pour qu'il ne soit pas détecté)
 
         """
         if pok.dico_poke[nom_poke].coordX == 'pokédeck':
             return 1000
-        return np.sqrt((coord[0] - pok.dico_poke[nom_poke].coordX)**2 + (coord[1] - pok.dico_poke[nom_poke].coordY)**2)
+        dist = np.sqrt((coord[0] - pok.dico_poke[nom_poke].coordX)**2 + (coord[1] - pok.dico_poke[nom_poke].coordY)**2)
+        return dist
 
     def detection(self,coord):
         """
-        Cherche si le personnage est dans la zone de détection
+        Cherche si le personnage est dans la zone de détection d'un pokémon
 
         Parameters
         ----------
-        coord : TYPE liste
-            DESCRIPTION.
+        coord : coordonnées du personnage
+                type : list
 
         Returns
         -------
-        k : TYPE 
-            DESCRIPTION. nom du pokémon
+        k : nom du pokémon détecté
+                type : str
+        None : retourne None si aucun pokémon n'est détecté
 
         """
         distance_detection = 50
@@ -167,9 +171,9 @@ class MainWindow(QMainWindow):
         return None
     
     def open_dialog_Pokedeck(self):
-        # Créez une instance de la boîte de dialogue
+        # Création d'une instance de la boîte de dialogue
         classe_pokedeck = PokedeckDlg()
-        classe_pokedeck.exec_()  # Affichez la boîte de dialogue de manière modale
+        classe_pokedeck.exec_()
         self.ui.tete_perso.setFocus()
         
         
@@ -445,7 +449,7 @@ class EcranTripleDlg(QDialog):
         
     def open_dialog_choix_pokemon(self):
         classe_choix_pokemon = ChoixPokemonDlg(pokemon_sauvage=self.pokemon_sauvage, sauvageHP=self.sauvageHP,
-                                               ini_sauv_HP=self.sauvageHP, debut=False)
+                                               ini_sauv_HP=self.ini_sauv_HP, debut=False)
         classe_choix_pokemon.exec_()  # Affichez la boîte de dialogue de manière modale
         self.close()
         window.ui.tete_perso.setFocus()
@@ -478,16 +482,15 @@ class CapturePokemonDlg(QDialog):
     
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
     
-    window = MainWindow()
+    app = QApplication(sys.argv)
+    window = MapMainWindow()
     window.show()
     sys.exit(app.exec_())
     
     
 """
 separer classes
-remettre au propre
 documenter code
 voir rapport
 """
