@@ -4,6 +4,9 @@
 * Manceau Loéva
 * Pelissier Maïlys
 
+Version numpy utilisée : 1.24.3
+Version PyQT utilisée : 5.15.7
+
 ## Manuel d'utilisation du projet pokémon :
 
 ### Lancement du jeu :
@@ -59,15 +62,22 @@
 * Un fichier python contenant la classe Pokemon et Caracteristiques_Pokemons
 
 #### Dans le répertoire "interface_graphique", on retrouve :
-* ecran_accueil au format ui et py : il contient la boîte de dialogue de l'écran d'accueil où le joueur clique sur "play"
+* ecran_accueil au format ui et py : il contient la boîte de dialogue de l'écran d'accueil où le joueur clique sur "play".
+
 * map au format ui et py : c'est la mainwindow. Elle représente la carte.
-* pokedeck au format ui et py :
-* rencontre_pokemon_sauvage au au format ui et py
-* choix_attaque au au format ui et py
-* fond_combatau au format ui et py
-* ecran_tripleau au format ui et py
-* capture_pokemon au au format ui et py
+
+* pokedeck au format ui et py :  boîte de dialogue du pokedeck où le joueur peut voir les pokémons capturés.
+
+* rencontre_pokemon_sauvage  au format ui et py : écran qui s'affiche lorsque le joueur croise un pokémon sauvage.
+
+* choix_attaque au format ui et py : écran où le joueur décide d'une attaque neutre ou d'une attaque spéciale
+
+* fond_combat  au format ui et py : représente l'arène où s'affronte les deux pokémons.
+
+* ecran_triple au format ui et py : boîte de dialogue où le joueur décide d'attaquer, de changer de pokémon ou de fuir.
+
+* capture_pokemon au  format ui et py : écran qui annonce au joueur la capture du pokémon sauvage
 
 ### Le main :
-* main_map 
+* main_map : contient la classe MainWindow
 
